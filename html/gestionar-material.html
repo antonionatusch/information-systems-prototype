@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Materiales</title>
+    <link rel="stylesheet" href="../css/homestyles.css">
+    <link rel="stylesheet" href="../css/crudstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="material.html" class="active">Material de Escritorio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="crud-container">
+            <h2>Gestión de Materiales</h2>
+            <button id="create-new" class="btn">Crear Nuevo</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="material-table">
+                    <!-- Registros predefinidos -->
+                </tbody>
+            </table>
+        </div>
+        <div id="form-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Crear/Modificar Material</h3>
+                <form id="material-form">
+                    <label for="name">Nombre del Material:</label>
+                    <input type="text" id="name" required>
+                    <label for="description">Descripción:</label>
+                    <input type="text" id="description" required>
+                    <label for="quantity">Cantidad:</label>
+                    <input type="number" id="quantity" required>
+                    <button type="submit" class="btn">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/materiales-crud.js"></script>
+</body>
+</html>
