@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('type-form');
 
   let types = [
-    { code: 'M001', class: 'Papelería' },
-    { code: 'M002', class: 'Herramientas' },
-    { code: 'M003', class: 'Electrónica' },
+    { code: 'T001', class: 'Papelería' },
+    { code: 'T002', class: 'Herramientas' },
+    { code: 'T003', class: 'Electrónica' },
   ];
 
   const renderTable = () => {

@@ -28,6 +28,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Cantidad</th>
@@ -45,6 +46,10 @@
                 <span class="close">&times;</span>
                 <h3>Crear/Modificar Material</h3>
                 <form id="material-form" class="form-grid">
+                    <div class="form-group">
+                        <label for="code">Código:</label>
+                        <input type="text" id="code" required>
+                    </div>
                     <div class="form-group">
                         <label for="name">Nombre del Material:</label>
                         <input type="text" id="name" required>
