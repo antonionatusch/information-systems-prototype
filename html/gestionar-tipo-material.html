@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Tipo de Material</title>
+    <link rel="stylesheet" href="../css/homestyles.css">
+    <link rel="stylesheet" href="../css/crudstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="material.html">Material de Escritorio</a></li>
+                <li><a href="gestionar-tipo-material.html" class="active">Tipo de Material</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="crud-container">
+            <h2>Gestión de Tipos de Material</h2>
+            <button id="create-new-type" class="btn">Crear Nuevo</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Clase/Tipo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="type-table">
+                    <!-- Registros predefinidos -->
+                </tbody>
+            </table>
+        </div>
+        <div id="form-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Crear/Modificar Tipo de Material</h3>
+                <form id="type-form" class="form-grid">
+                    <div class="form-group">
+                        <label for="code">Código:</label>
+                        <input type="text" id="code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="class">Clase/Tipo:</label>
+                        <input type="text" id="class" required>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Guardar</button>
+                        <button type="button" class="btn cancel-btn" id="cancel">Regresar a la Lista</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/tipo-material-crud.js"></script>
+</body>
+</html>
