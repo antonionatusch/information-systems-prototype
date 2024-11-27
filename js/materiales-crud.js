@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('material-form');
   const typeSelect = document.getElementById('type');
 
-  // Registros predefinidos de materiales
-  let materials = [
+  // Recuperar materiales y tipos desde Local Storage
+  let materials = JSON.parse(localStorage.getItem('materials')) || [
     {
       code: 'MAT001',
       name: 'Pestañas Separadoras',
@@ -30,8 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ];
 
-  // Tipos de material cargados desde gestionar-tipo-material
-  let types = ['Papelería', 'Herramientas', 'Electrónica'];
+  let types = JSON.parse(localStorage.getItem('types')) || [
+    'Papelería',
+    'Herramientas',
+    'Electrónica',
+  ];
 
   const renderTable = () => {
     materialTable.innerHTML = '';
@@ -92,6 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
       materials.push({ code, name, description, quantity, type });
     }
 
+    // Guardar en Local Storage
+    localStorage.setItem('materials', JSON.stringify(materials));
     modal.style.display = 'none';
     renderTable();
   });
@@ -116,9 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('delete')) {
       const index = e.target.dataset.index;
       materials.splice(index, 1);
+
+      // Actualizar Local Storage
+      localStorage.setItem('materials', JSON.stringify(materials));
       renderTable();
     }
   });
 
+  // Inicializar
+  populateTypeSelect();
   renderTable();
 });
