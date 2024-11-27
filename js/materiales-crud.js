@@ -39,18 +39,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderTable = () => {
     materialTable.innerHTML = '';
     materials.forEach((material, index) => {
+      const materialType =
+        typeof material.type === 'object' && material.type !== null
+          ? material.type.class // Extraer el campo 'class' si es un objeto
+          : material.type; // Usar el valor directamente si es un string
+
       const row = document.createElement('tr');
       row.innerHTML = `
-                <td>${material.code}</td>
-                <td>${material.name}</td>
-                <td>${material.description}</td>
-                <td>${material.quantity}</td>
-                <td>${material.type}</td>
-                <td>
-                    <button class="btn edit" data-index="${index}">Modificar</button>
-                    <button class="btn delete" data-index="${index}">Eliminar</button>
-                </td>
-            `;
+            <td>${material.code}</td>
+            <td>${material.name}</td>
+            <td>${material.description}</td>
+            <td>${material.quantity}</td>
+            <td>${materialType}</td>
+            <td>
+                <button class="btn edit" data-index="${index}">Modificar</button>
+                <button class="btn delete" data-index="${index}">Eliminar</button>
+            </td>
+        `;
       materialTable.appendChild(row);
     });
   };
