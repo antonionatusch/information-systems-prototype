@@ -5,14 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('material-form');
   const typeSelect = document.getElementById('type');
 
-  // Registros predefinidos de materiales
-  let materials = [
+  // Valores iniciales para materiales y tipos
+  let initialMaterials = [
     {
       code: 'MAT001',
       name: 'Pestañas Separadoras',
       description: 'Separadores para documentos',
       quantity: 20,
       type: 'Papelería',
+      unit: 'paquete',
     },
     {
       code: 'MAT002',
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Sobres tamaño oficio',
       quantity: 50,
       type: 'Papelería',
+      unit: 'paquete',
     },
     {
       code: 'MAT003',
@@ -27,11 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Carpetas de color amarillo',
       quantity: 30,
       type: 'Papelería',
+      unit: 'unidad',
     },
   ];
 
-  // Tipos de material cargados desde gestionar-tipo-material
-  let types = ['Papelería', 'Herramientas', 'Electrónica'];
+  let initialTypes = [
+    { code: 'T001', class: 'Papelería' },
+    { code: 'T002', class: 'Herramientas' },
+    { code: 'T003', class: 'Electrónica' },
+  ];
+
+  // Inicializar Local Storage si no existen los valores
+  if (!localStorage.getItem('materials')) {
+    localStorage.setItem('materials', JSON.stringify(initialMaterials));
+  }
+
+  if (!localStorage.getItem('types')) {
+    localStorage.setItem('types', JSON.stringify(initialTypes));
+  }
+
+  // Recuperar datos del Local Storage
+  let materials = JSON.parse(localStorage.getItem('materials'));
+  let types = JSON.parse(localStorage.getItem('types'));
 
   const renderTable = () => {
     materialTable.innerHTML = '';
@@ -43,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${material.description}</td>
                 <td>${material.quantity}</td>
                 <td>${material.type}</td>
+                <td>${material.unit}</td>
                 <td>
                     <button class="btn edit" data-index="${index}">Modificar</button>
                     <button class="btn delete" data-index="${index}">Eliminar</button>
@@ -56,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
     typeSelect.innerHTML = '';
     types.forEach((type) => {
       const option = document.createElement('option');
-      option.value = type;
-      option.textContent = type;
+      option.value = type.class;
+      option.textContent = type.class;
       typeSelect.appendChild(option);
     });
   };
@@ -80,18 +100,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const description = document.getElementById('description').value;
     const quantity = document.getElementById('quantity').value;
     const type = document.getElementById('type').value;
+    const unit = document.getElementById('unit').value;
 
     if (form.dataset.editing === 'true') {
       const index = form.dataset.index;
-      materials[index] = { code, name, description, quantity, type };
+      materials[index] = { code, name, description, quantity, type, unit };
     } else {
       if (materials.find((material) => material.code === code)) {
         alert('El código ya existe. Por favor, utiliza uno diferente.');
         return;
       }
-      materials.push({ code, name, description, quantity, type });
+      materials.push({ code, name, description, quantity, type, unit });
     }
 
+    // Guardar en Local Storage
+    localStorage.setItem('materials', JSON.stringify(materials));
     modal.style.display = 'none';
     renderTable();
   });
@@ -106,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('description').value = material.description;
       document.getElementById('quantity').value = material.quantity;
       document.getElementById('type').value = material.type;
+      document.getElementById('unit').value = material.unit;
 
       form.dataset.editing = true;
       form.dataset.index = index;
@@ -116,9 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('delete')) {
       const index = e.target.dataset.index;
       materials.splice(index, 1);
+
+      // Actualizar Local Storage
+      localStorage.setItem('materials', JSON.stringify(materials));
       renderTable();
     }
   });
 
+  // Inicializar
+  populateTypeSelect();
   renderTable();
 });

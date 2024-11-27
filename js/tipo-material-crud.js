@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModal = document.querySelector('.close');
   const form = document.getElementById('type-form');
 
-  let types = [
+  // Recuperar tipos desde Local Storage
+  let types = JSON.parse(localStorage.getItem('types')) || [
     { code: 'T001', class: 'Papelería' },
     { code: 'T002', class: 'Herramientas' },
     { code: 'T003', class: 'Electrónica' },
@@ -48,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
       types.push({ code, class: classType });
     }
 
+    // Guardar en Local Storage
+    localStorage.setItem('types', JSON.stringify(types));
     modal.style.display = 'none';
     renderTable();
   });
@@ -68,9 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('delete')) {
       const index = e.target.dataset.index;
       types.splice(index, 1);
+
+      // Actualizar Local Storage
+      localStorage.setItem('types', JSON.stringify(types));
       renderTable();
     }
   });
 
+  // Inicializar
   renderTable();
 });

@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #00457c;
+    color: white;
+    padding: 10px 0;
+}
+
+header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+header .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header .nav-links li a.active {
+    color: #ffcc00;
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Section: Solicitar Materiales */
+.crud-container {
+    margin-top: 20px;
+}
+
+h2, h3 {
+    color: #00457c;
+    text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    grid-column: span 2;
+    text-align: center;
+}
+
+.form-buttons .btn {
+    background-color: #00457c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-buttons .btn:hover {
+    background-color: #003653;
+}
+
+/* Table: Solicitudes Realizadas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #00457c;
+    color: white;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+tfoot {
+    text-align: right;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    background-color: #00457c;
+    color: white;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 14px;
+}
