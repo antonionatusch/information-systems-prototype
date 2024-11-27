@@ -28,6 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Calcular la cantidad ya solicitada de un material
+  const calculateRequestedQuantity = (materialCode) => {
+    return requests
+      .filter((request) => request.materialCode === materialCode)
+      .reduce((total, request) => total + parseInt(request.quantity, 10), 0);
+  };
+
   // Renderizar solicitudes
   const renderRequests = () => {
     requestsTable.innerHTML = '';
@@ -49,10 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedMaterial = materials.find(
       (m) => m.code === materialSelect.value,
     );
-    const quantity = quantityInput.value;
+    const quantity = parseInt(quantityInput.value, 10);
 
     if (!selectedMaterial) {
       alert('Por favor, selecciona un material válido.');
+      return;
+    }
+
+    const alreadyRequested = calculateRequestedQuantity(selectedMaterial.code);
+    const availableQuantity = selectedMaterial.quantity - alreadyRequested;
+
+    if (quantity > availableQuantity) {
+      alert(
+        `El material "${selectedMaterial.name}" ya no está disponible para su solicitud. Cantidad disponible: ${availableQuantity}`,
+      );
       return;
     }
 
