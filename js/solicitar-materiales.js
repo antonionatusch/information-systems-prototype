@@ -1,62 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('request-form');
   const materialSelect = document.getElementById('material');
-  const requestList = document.getElementById('request-list');
+  const quantityInput = document.getElementById('quantity');
+  const unitDisplay = document.getElementById('unit-display');
+  const requestsTable = document.getElementById('requests-table');
 
-  // Load materials and types from Local Storage
+  // Recuperar datos del Local Storage
   const materials = JSON.parse(localStorage.getItem('materials')) || [];
   const requests = JSON.parse(localStorage.getItem('requests')) || [];
 
-  // Populate materials dropdown
+  // Renderizar opciones de materiales
   const populateMaterials = () => {
     materialSelect.innerHTML = '';
     materials.forEach((material) => {
       const option = document.createElement('option');
       option.value = material.code;
-      option.textContent = `${material.name} (${material.type})`;
+      option.textContent = material.name;
       materialSelect.appendChild(option);
     });
   };
 
-  // Render requests
+  // Mostrar unidad de medida al seleccionar un material
+  materialSelect.addEventListener('change', (e) => {
+    const selectedMaterial = materials.find((m) => m.code === e.target.value);
+    if (selectedMaterial) {
+      unitDisplay.textContent = selectedMaterial.unit;
+    }
+  });
+
+  // Renderizar solicitudes
   const renderRequests = () => {
-    requestList.innerHTML = '';
+    requestsTable.innerHTML = '';
     requests.forEach((request) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-                <td>${request.material}</td>
+                <td>${request.materialName}</td>
                 <td>${request.quantity}</td>
                 <td>${request.unit}</td>
                 <td>${request.status}</td>
             `;
-      requestList.appendChild(row);
+      requestsTable.appendChild(row);
     });
   };
 
-  // Form submit handler
+  // Manejar envío del formulario
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const selectedMaterial =
-      materialSelect.options[materialSelect.selectedIndex].textContent;
-    const quantity = document.getElementById('quantity').value;
-    const unit = document.getElementById('unit').value;
+    const selectedMaterial = materials.find(
+      (m) => m.code === materialSelect.value,
+    );
+    const quantity = quantityInput.value;
 
-    // Add request to Local Storage
+    if (!selectedMaterial) {
+      alert('Por favor, selecciona un material válido.');
+      return;
+    }
+
     const newRequest = {
-      material: selectedMaterial,
-      quantity,
-      unit,
-      status: 'Pendiente de Revisión',
+      materialCode: selectedMaterial.code,
+      materialName: selectedMaterial.name,
+      quantity: quantity,
+      unit: selectedMaterial.unit,
+      status: 'Pendiente',
     };
+
     requests.push(newRequest);
     localStorage.setItem('requests', JSON.stringify(requests));
-
     renderRequests();
+
+    // Resetear formulario
     form.reset();
+    unitDisplay.textContent = '';
   });
 
-  // Initial load
+  // Inicializar
   populateMaterials();
   renderRequests();
 });
-``;
