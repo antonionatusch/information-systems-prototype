@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Materiales</title>
+    <link rel="stylesheet" href="../css/homestyles.css">
+    <link rel="stylesheet" href="../css/ordermaterialstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="material.html">Material de Escritorio</a></li>
+                <li><a href="gestionar-tipo-material.html">Tipo de Material</a></li>
+                <li><a href="#" class="active">Solicitar Materiales</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="crud-container">
+            <h2>Solicitar Materiales</h2>
+            <form id="request-form" class="form-grid">
+                <div class="form-group">
+                    <label for="material">Material:</label>
+                    <select id="material" required>
+                        <!-- Opciones cargadas dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Cantidad:</label>
+                    <input type="number" id="quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="unit">Unidad de Medida:</label>
+                    <select id="unit" required>
+                        <option value="unid">Unidad</option>
+                        <option value="caja">Caja</option>
+                        <option value="paquete">Paquete</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn">Solicitar</button>
+                </div>
+            </form>
+            <h3>Solicitudes Realizadas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Material</th>
+                        <th>Cantidad</th>
+                        <th>Unidad</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="request-list">
+                    <!-- Solicitudes cargadas dinámicamente -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/solicitar-materiales.js"></script>
+</body>
+</html>
