@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   let types = JSON.parse(localStorage.getItem('types')) || [
-    'Papelería',
-    'Herramientas',
-    'Electrónica',
+    { code: 'T001', class: 'Papelería' },
+    { code: 'T002', class: 'Herramientas' },
+    { code: 'T003', class: 'Electrónica' },
   ];
 
   const renderTable = () => {
@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
     typeSelect.innerHTML = '';
     types.forEach((type) => {
       const option = document.createElement('option');
-      option.value = type;
-      option.textContent = type;
+      option.value = type.class; // Usar el campo "class" para mostrar en el menú desplegable
+      option.textContent = type.class; // Mostrar el nombre legible en el menú desplegable
       typeSelect.appendChild(option);
     });
   };
