@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Separadores para documentos',
       quantity: 20,
       type: 'Papelería',
+      unit: 'paquete',
     },
     {
       code: 'MAT002',
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Sobres tamaño oficio',
       quantity: 50,
       type: 'Papelería',
+      unit: 'paquete',
     },
     {
       code: 'MAT003',
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Carpetas de color amarillo',
       quantity: 30,
       type: 'Papelería',
+      unit: 'unidad',
     },
   ];
 
@@ -59,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${material.description}</td>
                 <td>${material.quantity}</td>
                 <td>${material.type}</td>
+                <td>${material.unit}</td>
                 <td>
                     <button class="btn edit" data-index="${index}">Modificar</button>
                     <button class="btn delete" data-index="${index}">Eliminar</button>
@@ -96,16 +100,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const description = document.getElementById('description').value;
     const quantity = document.getElementById('quantity').value;
     const type = document.getElementById('type').value;
+    const unit = document.getElementById('unit').value;
 
     if (form.dataset.editing === 'true') {
       const index = form.dataset.index;
-      materials[index] = { code, name, description, quantity, type };
+      materials[index] = { code, name, description, quantity, type, unit };
     } else {
       if (materials.find((material) => material.code === code)) {
         alert('El código ya existe. Por favor, utiliza uno diferente.');
         return;
       }
-      materials.push({ code, name, description, quantity, type });
+      materials.push({ code, name, description, quantity, type, unit });
     }
 
     // Guardar en Local Storage
@@ -124,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('description').value = material.description;
       document.getElementById('quantity').value = material.quantity;
       document.getElementById('type').value = material.type;
+      document.getElementById('unit').value = material.unit;
 
       form.dataset.editing = true;
       form.dataset.index = index;
