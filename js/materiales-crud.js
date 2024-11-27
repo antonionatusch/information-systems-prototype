@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('material-form');
   const typeSelect = document.getElementById('type');
 
-  // Recuperar materiales y tipos desde Local Storage
-  let materials = JSON.parse(localStorage.getItem('materials')) || [
+  // Valores iniciales para materiales y tipos
+  let initialMaterials = [
     {
       code: 'MAT001',
       name: 'Pestañas Separadoras',
@@ -30,32 +30,40 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ];
 
-  let types = JSON.parse(localStorage.getItem('types')) || [
+  let initialTypes = [
     { code: 'T001', class: 'Papelería' },
     { code: 'T002', class: 'Herramientas' },
     { code: 'T003', class: 'Electrónica' },
   ];
 
+  // Inicializar Local Storage si no existen los valores
+  if (!localStorage.getItem('materials')) {
+    localStorage.setItem('materials', JSON.stringify(initialMaterials));
+  }
+
+  if (!localStorage.getItem('types')) {
+    localStorage.setItem('types', JSON.stringify(initialTypes));
+  }
+
+  // Recuperar datos del Local Storage
+  let materials = JSON.parse(localStorage.getItem('materials'));
+  let types = JSON.parse(localStorage.getItem('types'));
+
   const renderTable = () => {
     materialTable.innerHTML = '';
     materials.forEach((material, index) => {
-      const materialType =
-        typeof material.type === 'object' && material.type !== null
-          ? material.type.class // Extraer el campo 'class' si es un objeto
-          : material.type; // Usar el valor directamente si es un string
-
       const row = document.createElement('tr');
       row.innerHTML = `
-            <td>${material.code}</td>
-            <td>${material.name}</td>
-            <td>${material.description}</td>
-            <td>${material.quantity}</td>
-            <td>${materialType}</td>
-            <td>
-                <button class="btn edit" data-index="${index}">Modificar</button>
-                <button class="btn delete" data-index="${index}">Eliminar</button>
-            </td>
-        `;
+                <td>${material.code}</td>
+                <td>${material.name}</td>
+                <td>${material.description}</td>
+                <td>${material.quantity}</td>
+                <td>${material.type}</td>
+                <td>
+                    <button class="btn edit" data-index="${index}">Modificar</button>
+                    <button class="btn delete" data-index="${index}">Eliminar</button>
+                </td>
+            `;
       materialTable.appendChild(row);
     });
   };
@@ -64,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     typeSelect.innerHTML = '';
     types.forEach((type) => {
       const option = document.createElement('option');
-      option.value = type.class; // Usar el campo "class" para mostrar en el menú desplegable
-      option.textContent = type.class; // Mostrar el nombre legible en el menú desplegable
+      option.value = type.class;
+      option.textContent = type.class;
       typeSelect.appendChild(option);
     });
   };
