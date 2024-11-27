@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Captura los valores del formulario
         const nombre = document.getElementById('name').value;
         const fechaInicio = document.getElementById('start-date').value;
+        const horaInicio = document.getElementById('start-time').value;
         const fechaFin = document.getElementById('end-date').value;
         const motivo = document.querySelector('select[name="reason"] option:checked').textContent;
 
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const solicitud = {
             nombre,
             fechaInicio,
+            horaInicio,
             fechaFin,
             motivo,
             estado: 'Pendiente',
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.innerHTML = `
             <td>${solicitud.nombre}</td>
             <td>${solicitud.fechaInicio}</td>
+            <td>${solicitud.horaInicio}</td>
             <td>${solicitud.fechaFin}</td>
             <td>${solicitud.motivo}</td>
             <td class="estado">${solicitud.estado}</td>
