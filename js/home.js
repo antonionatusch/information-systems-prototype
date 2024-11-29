@@ -1,20 +1,3 @@
-// Aquí puedes añadir cualquier funcionalidad JavaScript necesaria para la página
-console.log('Sistema de Gestión Administrativa iniciado');
-
-document.addEventListener('DOMContentLoaded', () => {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  const loginLink = document.getElementById('login-link');
-  const gestionarEmpleadoLink = document.getElementById(
-    'gestionar-empleado-link',
-  );
-
-  if (currentUser && currentUser.role === 'Gerente Administrativo') {
-    // Mostrar enlace "Gestionar Empleados" y ocultar "Login"
-    gestionarEmpleadoLink.style.display = 'block';
-    loginLink.style.display = 'none';
-  }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const loginLink = document.getElementById('login-link');
@@ -23,11 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     'gestionar-empleado-link',
   );
 
-  if (currentUser && currentUser.role === 'Gerente Administrativo') {
+  if (currentUser) {
     // Mostrar enlaces para usuarios autenticados
-    gestionarEmpleadoLink.style.display = 'block';
     logoutLink.style.display = 'block';
     loginLink.style.display = 'none';
+
+    // Mostrar enlace "Gestionar Empleados" solo para Gerente Administrativo
+    if (currentUser.role === 'Gerente Administrativo') {
+      gestionarEmpleadoLink.style.display = 'block';
+    } else {
+      gestionarEmpleadoLink.style.display = 'none';
+    }
+  } else {
+    // Ocultar enlaces si no hay usuario autenticado
+    logoutLink.style.display = 'none';
+    gestionarEmpleadoLink.style.display = 'none';
+    loginLink.style.display = 'block';
   }
 
   // Cerrar sesión
