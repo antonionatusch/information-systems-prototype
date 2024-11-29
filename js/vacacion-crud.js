@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${solicitud.fechaInicio}</td>
             <td>${solicitud.fechaFin}</td>
             <td>${solicitud.horaInicio}</td>
-            <td>${solicitud.fechaFin}</td>
+            <td>${solicitud.horaFin}</td>
             <td>${solicitud.motivo}</td>
             <td class="estado">${solicitud.estado}</td>
             <td>
