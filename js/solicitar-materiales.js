@@ -4,10 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const quantityInput = document.getElementById('quantity');
   const unitDisplay = document.getElementById('unit-display');
   const requestsTable = document.getElementById('requests-table');
+  const requesterField = document.getElementById('requester'); // Campo para el solicitante
 
   // Recuperar datos del Local Storage
   const materials = JSON.parse(localStorage.getItem('materials')) || [];
   const requests = JSON.parse(localStorage.getItem('requests')) || [];
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')); // Usuario actual
+
+  // Configurar el campo del solicitante
+  if (currentUser && currentUser.name) {
+    requesterField.value = currentUser.name; // Autocompletar el solicitante
+  } else {
+    alert('No hay un usuario autenticado. Por favor, inicia sesión.');
+    window.location.href = '../html/login.html'; // Redirigir al login si no hay usuario
+    return;
+  }
 
   // Renderizar opciones de materiales
   const populateMaterials = () => {
@@ -44,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${request.materialName}</td>
                 <td>${request.quantity}</td>
                 <td>${request.unit}</td>
+                <td>${request.requester}</td> <!-- Agregado el solicitante -->
                 <td>${request.status}</td>
             `;
       requestsTable.appendChild(row);
@@ -78,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       materialName: selectedMaterial.name,
       quantity: quantity,
       unit: selectedMaterial.unit,
+      requester: currentUser.name, // Asociar al solicitante actual
       status: 'Pendiente',
     };
 

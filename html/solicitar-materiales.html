@@ -38,20 +38,25 @@
                     <label for="unit">Unidad de Medida:</label>
                     <span id="unit-display"></span>
                 </div>
+                <div class="form-group">
+                  <label for="requester">Solicitante:</label>
+                  <input type="text" id="requester" readonly>
+                </div>
                 <div class="form-buttons">
                     <button type="submit" class="btn">Solicitar</button>
                 </div>
             </form>
             <h3>Solicitudes Realizadas</h3>
             <table>
-                <thead>
-                    <tr>
-                        <th>Material</th>
-                        <th>Cantidad</th>
-                        <th>Unidad</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>Cantidad</th>
+                  <th>Unidad</th>
+                  <th>Solicitante</th> <!-- Nueva columna -->
+                  <th>Estado</th>
+                </tr>
+              </thead>
                 <tbody id="requests-table"></tbody>
             </table>
         </div>

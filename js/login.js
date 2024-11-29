@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultAccount = {
     username: 'admin',
     password: 'admin123',
+    name: 'Juan Perez',
     role: 'Gerente Administrativo',
   };
 
