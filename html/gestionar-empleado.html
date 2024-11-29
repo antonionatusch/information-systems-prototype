@@ -32,19 +32,27 @@
             </table>
         </div>
         <div id="form-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Crear/Modificar Empleado</h3>
-                <form id="employee-form">
-                    <input type="hidden" id="employee-id">
-                    <label for="employee-name">Nombre:</label>
-                    <input type="text" id="employee-name" required>
-                    <label for="employee-role">Cargo:</label>
-                    <input type="text" id="employee-role" required>
-                    <button type="submit" class="btn">Guardar</button>
-                </form>
-            </div>
-        </div>
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Crear/Modificar Empleado</h3>
+            <form id="employee-form">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="role">Cargo:</label>
+                <input type="text" id="role" name="role" required>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Guardar</button>
+            </form>
+          </div>
+      </div>
+
     </main>
     <script src="../js/empleados-crud.js"></script>
 </body>
