@@ -39,7 +39,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const horaFin = document.getElementById('end-time').value;
         const motivo = document.querySelector('select[name="reason"] option:checked').textContent;
 
-        const nuevaSolicitud = { id, fechaInicio, fechaFin, horaInicio, horaFin, motivo, estado: 'Pendiente' };
+        const nuevaSolicitud = { 
+            id, 
+            fechaInicio, 
+            fechaFin, 
+            horaInicio, 
+            horaFin, 
+            motivo, 
+            estado: 'Pendiente' 
+        };
 
         if (editingIndex === null) {
             // Si no se está editando, agregar una nueva solicitud
@@ -115,10 +123,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para abrir el modal y rellenar el formulario para edición
     function abrirParaEditar(solicitud, index) {
         modal.style.display = 'flex';
-        document.getElementById('name').value = solicitud.nombre;
+        document.getElementById('id').value = solicitud.id;
         document.getElementById('start-date').value = solicitud.fechaInicio;
-        document.getElementById('start-time').value = solicitud.horaInicio;
         document.getElementById('end-date').value = solicitud.fechaFin;
+        document.getElementById('start-time').value = solicitud.horaInicio;
+        document.getElementById('end-time').value = solicitud.horaFin;
         document.querySelector('select[name="reason"]').value = solicitud.motivo;
         editingIndex = index; // Guardar el índice de la fila que se está editando
     }
