@@ -33,17 +33,17 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         // Captura los valores del formulario
-        const nombre = document.getElementById('name').value;
+        const id = document.getElementById('id').value;
         const jefe = document.getElementById('boss').value;
-        const unidad = document.querySelector('select[name="unit"]').value;
+        const unidad = document.querySelector('select[name="unit"] option:checked').textContent;
         const horaInicio = document.getElementById('start-time').value;
         const horaFin = document.getElementById('end-time').value;
-        const motivo = document.querySelector('select[name="reason"]').value;
+        const motivo = document.querySelector('select[name="reason"] option:checked').textContent;
         const observaciones = document.getElementById('description').value;
 
         // Crea un objeto con los datos del permiso
         const permiso = {
-            nombre,
+            id,
             jefe,
             unidad,
             horaInicio,
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function agregarFila(permiso, index) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td>${permiso.nombre}</td>
+            <td>${permiso.id}</td>
             <td>${permiso.jefe}</td>
             <td>${permiso.unidad}</td>
             <td>${permiso.horaInicio}</td>
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para abrir el modal y rellenar el formulario para edición
     function abrirParaEditar(permiso, index) {
         modal.style.display = 'flex';
-        document.getElementById('name').value = permiso.nombre;
+        document.getElementById('id').value = permiso.id;
         document.getElementById('boss').value = permiso.jefe;
         document.querySelector('select[name="unit"]').value = permiso.unidad;
         document.getElementById('start-time').value = permiso.horaInicio;
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function actualizarFila(permiso, index) {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
-        row.cells[0].textContent = permiso.nombre;
+        row.cells[0].textContent = permiso.id;
         row.cells[1].textContent = permiso.jefe;
         row.cells[2].textContent = permiso.unidad;
         row.cells[3].textContent = permiso.horaInicio;

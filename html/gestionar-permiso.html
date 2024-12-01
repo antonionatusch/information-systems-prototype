@@ -27,7 +27,7 @@
             <table id="table-requests" class="styled-table">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>ID</th>
                         <th>Jefe Inmediato</th>
                         <th>Unidad</th>
                         <th>Hora de Inicio</th>
@@ -51,8 +51,8 @@
                 <span id="close-modal" class="close">&times;</span>
                 <h2>Ingresar Permiso</h2>
                 <form id="form-permit">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="id">Código:</label>
+                    <input type="text" id="id" name="id" required>
 
                     <label for="boss">Jefe Inmediato:</label>
                     <input type="text" id="boss" name="boss" required>
@@ -67,12 +67,12 @@
                     
                     <div class="form-row">
                         <div>
-                            <label for="start-time">Fecha de Inicio:</label>
+                            <label for="start-time">Periodo:</label>
                             <input type="time" id="start-time" name="start-time" required>
                         </div>
                         
                         <div>
-                            <label for="end-time">Fecha de Fin:</label>
+                            <label for="end-time"> </label>
                             <input type="time" id="end-time" name="end-time" required>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                     <textarea id="description" name="description" rows="4" required></textarea>
                     
                     <div class="form-footer">
-                        <button type="submit" class="btn-send">Enviar Solicitud</button>
+                        <button type="submit" class="btn-send">Enviar Permiso</button>
                         <button type="button" class="btn-cancel" onclick="window.location.href='./gestionar-permiso.html'">Cancelar</button>
                     </div>
                 </form>
