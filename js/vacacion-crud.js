@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Captura los valores del formulario
         const nombre = document.getElementById('name').value;
+        const jefe = document.getElementById('boss').value;
         const fechaInicio = document.getElementById('start-date').value;
         const fechaFin = document.getElementById('end-date').value;
         const horaInicio = document.getElementById('start-time').value;
@@ -41,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const nuevaSolicitud = {
             id: 1,
-            nombre, 
+            nombre,
+            jefe,
             fechaInicio, 
             fechaFin, 
             horaInicio, 
@@ -75,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para agregar una fila a la tabla
     function agregarFila(solicitud, index) {
-        let iter = 0;
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
             <td>${solicitud.id + index}</td>
             <td>${solicitud.nombre}</td>
+            <td>${solicitud.jefe}</td>
             <td>${solicitud.fechaInicio}</td>
             <td>${solicitud.fechaFin}</td>
             <td>${solicitud.horaInicio}</td>
@@ -126,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function abrirParaEditar(solicitud, index) {
         modal.style.display = 'flex';
         document.getElementById('name').value = solicitud.nombre;
+        document.getElementById('boss').value = solicitud.jefe;
         document.getElementById('start-date').value = solicitud.fechaInicio;
         document.getElementById('end-date').value = solicitud.fechaFin;
         document.getElementById('start-time').value = solicitud.horaInicio;
@@ -146,12 +149,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
         row.cells[1].textContent = solicitud.nombre;
-        row.cells[2].textContent = solicitud.fechaInicio;
-        row.cells[3].textContent = solicitud.fechaFin;
-        row.cells[4].textContent = solicitud.horaInicio;
-        row.cells[5].textContent = solicitud.horaFin;
-        row.cells[6].textContent = solicitud.motivo;
-        row.cells[7].textContent = solicitud.estado;
+        row.cells[2].textContent = solicitud.jefe;
+        row.cells[3].textContent = solicitud.fechaInicio;
+        row.cells[4].textContent = solicitud.fechaFin;
+        row.cells[5].textContent = solicitud.horaInicio;
+        row.cells[6].textContent = solicitud.horaFin;
+        row.cells[7].textContent = solicitud.motivo;
+        row.cells[8].textContent = solicitud.estado;
     }
 
     // Función para eliminar una solicitud del localStorage

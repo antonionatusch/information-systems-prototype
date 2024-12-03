@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Captura los valores del formulario
         const nombre = document.getElementById('name').value;
+        const jefe = document.getElementById('boss').value;
         const unidad = document.querySelector('select[name="unit"] option:checked').textContent;
         const horaInicio = document.getElementById('start-time').value;
         const horaFin = document.getElementById('end-time').value;
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const permiso = {
             id: 1,
             nombre,
+            jefe,
             unidad,
             horaInicio,
             horaFin,
@@ -80,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.innerHTML = `
             <td>${permiso.id + index}</td>
             <td>${permiso.nombre}</td>
+            <td>${permiso.jefe}</td>
             <td>${permiso.unidad}</td>
             <td>${permiso.horaInicio}</td>
             <td>${permiso.horaFin}</td>

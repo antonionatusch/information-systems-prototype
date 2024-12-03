@@ -29,10 +29,11 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
+                        <th>Jefe Inmediato</th>
                         <th>Unidad</th>
                         <th>Hora de Inicio</th>
                         <th>Hora de Fin</th>
-                        <th>Motivo</th>
+                        <th>Tipo de Permiso</th>
                         <th>Observacion</th>
                         <th>Accion</th>
                     </tr>
@@ -53,6 +54,9 @@
                 <form id="form-permit">
                     <label for="name">Nombre:</label>
                     <input type="text" id="name" name="name" required>
+
+                    <label for="boss">Jefe Inmediato:</label>
+                    <input type="text" id="boss" name="boss" required>
 
                     <label for="unit">Unidad:</label>
                     <select name="unit">
