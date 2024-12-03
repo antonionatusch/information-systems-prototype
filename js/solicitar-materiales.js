@@ -100,16 +100,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Añadir funcionalidad para modificar el estado
   requestsTable.addEventListener('click', (e) => {
-    if (
-      e.target.classList.contains('approve') ||
-      e.target.classList.contains('deny')
-    ) {
-      const rowIndex = e.target.dataset.index;
-      const status = e.target.classList.contains('approve')
-        ? 'Autorizado'
-        : 'Denegado';
+    const rowIndex = e.target.dataset.index;
 
-      requests[rowIndex].status = status;
+    if (e.target.classList.contains('approve')) {
+      if (currentUser.role === 'Gerente Administrativo') {
+        requests[rowIndex].status = 'Autorizado';
+        localStorage.setItem('requests', JSON.stringify(requests));
+        renderRequests();
+      }
+    } else if (e.target.classList.contains('deny')) {
+      if (currentUser.role === 'Gerente Administrativo') {
+        requests[rowIndex].status = 'Denegado';
+        localStorage.setItem('requests', JSON.stringify(requests));
+        renderRequests();
+      }
+    } else if (e.target.classList.contains('edit')) {
+      const request = requests[rowIndex];
+      materialSelect.value = request.materialCode;
+      quantityInput.value = request.quantity;
+      dateInput.value = request.date;
+
+      requests.splice(rowIndex, 1);
+      localStorage.setItem('requests', JSON.stringify(requests));
+      renderRequests();
+    } else if (e.target.classList.contains('delete')) {
+      requests.splice(rowIndex, 1);
       localStorage.setItem('requests', JSON.stringify(requests));
       renderRequests();
     }
@@ -125,11 +140,19 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${request.quantity}</td>
         <td>${request.unit}</td>
         <td>${request.requester}</td>
-        <td>${request.date}</td>
+        <td>${request.date || 'Sin Fecha'}</td>
         <td>${request.status}</td>
         <td>
-          <button class="approve" data-index="${index}">Autorizar</button>
-          <button class="deny" data-index="${index}">Denegar</button>
+          <button class="edit" data-index="${index}">Modificar</button>
+          <button class="delete" data-index="${index}">Eliminar</button>
+          ${
+            currentUser.role === 'Gerente Administrativo'
+              ? `
+            <button class="approve" data-index="${index}">Autorizar</button>
+            <button class="deny" data-index="${index}">Denegar</button>
+          `
+              : ''
+          }
         </td>
       `;
       requestsTable.appendChild(row);
