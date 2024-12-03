@@ -33,8 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         // Captura los valores del formulario
-        const id = document.getElementById('id').value;
-        const jefe = document.getElementById('boss').value;
+        const nombre = document.getElementById('name').value;
         const unidad = document.querySelector('select[name="unit"] option:checked').textContent;
         const horaInicio = document.getElementById('start-time').value;
         const horaFin = document.getElementById('end-time').value;
@@ -43,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Crea un objeto con los datos del permiso
         const permiso = {
-            id,
-            jefe,
+            id: 1,
+            nombre,
             unidad,
             horaInicio,
             horaFin,
@@ -79,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function agregarFila(permiso, index) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td>${permiso.id}</td>
-            <td>${permiso.jefe}</td>
+            <td>${permiso.id + index}</td>
+            <td>${permiso.nombre}</td>
             <td>${permiso.unidad}</td>
             <td>${permiso.horaInicio}</td>
             <td>${permiso.horaFin}</td>
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para abrir el modal y rellenar el formulario para edición
     function abrirParaEditar(permiso, index) {
         modal.style.display = 'flex';
-        document.getElementById('id').value = permiso.id;
+        document.getElementById('name').value = permiso.nombre;
         document.getElementById('boss').value = permiso.jefe;
         document.querySelector('select[name="unit"]').value = permiso.unidad;
         document.getElementById('start-time').value = permiso.horaInicio;
@@ -125,13 +124,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function actualizarFila(permiso, index) {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
-        row.cells[0].textContent = permiso.id;
-        row.cells[1].textContent = permiso.jefe;
-        row.cells[2].textContent = permiso.unidad;
-        row.cells[3].textContent = permiso.horaInicio;
-        row.cells[4].textContent = permiso.horaFin;
-        row.cells[5].textContent = permiso.motivo;
-        row.cells[6].textContent = permiso.observaciones;
+        row.cells[1].textContent = permiso.nombre;
+        row.cells[2].textContent = permiso.jefe;
+        row.cells[3].textContent = permiso.unidad;
+        row.cells[4].textContent = permiso.horaInicio;
+        row.cells[5].textContent = permiso.horaFin;
+        row.cells[6].textContent = permiso.motivo;
+        row.cells[7].textContent = permiso.observaciones;
     }
 
     // Función para eliminar una fila de localStorage
