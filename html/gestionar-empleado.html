@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Empleados</title>
+    <link rel="stylesheet" href="../css/homestyles.css">
+    <link rel="stylesheet" href="../css/crudstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>Gestionar Empleados</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="crud-container">
+            <div class="action-buttons">
+                <button id="create-new" class="btn">Crear Nuevo</button>
+                <button id="back-to-home" class="btn">Volver al Inicio</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cargo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="employee-table"></tbody>
+            </table>
+        </div>
+        <div id="form-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Crear/Modificar Empleado</h3>
+            <form id="employee-form">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="role">Cargo:</label>
+                <input type="text" id="role" name="role" required>
+
+                <label for="username">Nombre de usuario:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Guardar</button>
+            </form>
+          </div>
+      </div>
+
+    </main>
+    <script src="../js/empleados-crud.js"></script>
+</body>
+</html>
