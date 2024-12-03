@@ -32,15 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         // Captura los valores del formulario
-        const id = document.getElementById('id').value;
+        const nombre = document.getElementById('name').value;
         const fechaInicio = document.getElementById('start-date').value;
         const fechaFin = document.getElementById('end-date').value;
         const horaInicio = document.getElementById('start-time').value;
         const horaFin = document.getElementById('end-time').value;
         const motivo = document.querySelector('select[name="reason"] option:checked').textContent;
 
-        const nuevaSolicitud = { 
-            id, 
+        const nuevaSolicitud = {
+            id: 1,
+            nombre, 
             fechaInicio, 
             fechaFin, 
             horaInicio, 
@@ -74,10 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para agregar una fila a la tabla
     function agregarFila(solicitud, index) {
+        let iter = 0;
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td>${solicitud.id}</td>
-            <td>Werner</td>
+            <td>${solicitud.id + index}</td>
+            <td>${solicitud.nombre}</td>
             <td>${solicitud.fechaInicio}</td>
             <td>${solicitud.fechaFin}</td>
             <td>${solicitud.horaInicio}</td>
@@ -123,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para abrir el modal y rellenar el formulario para edición
     function abrirParaEditar(solicitud, index) {
         modal.style.display = 'flex';
-        document.getElementById('id').value = solicitud.id;
+        document.getElementById('name').value = solicitud.nombre;
         document.getElementById('start-date').value = solicitud.fechaInicio;
         document.getElementById('end-date').value = solicitud.fechaFin;
         document.getElementById('start-time').value = solicitud.horaInicio;
@@ -143,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function actualizarFila(solicitud, index) {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
-        row.cells[0].textContent = solicitud.id;
+        row.cells[1].textContent = solicitud.nombre;
         row.cells[2].textContent = solicitud.fechaInicio;
         row.cells[3].textContent = solicitud.fechaFin;
         row.cells[4].textContent = solicitud.horaInicio;
