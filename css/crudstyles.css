@@ -66,6 +66,7 @@ th {
     float: right;
     cursor: pointer;
 }
+
 .form-grid {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -73,16 +74,12 @@ th {
     margin-top: 20px;
 }
 
-.form-group {
-    display: contents;
-}
-
 label {
     font-weight: bold;
     align-self: center;
 }
 
-input {
+input, select {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
