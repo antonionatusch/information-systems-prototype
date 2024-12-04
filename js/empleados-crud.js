@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const employees = JSON.parse(localStorage.getItem('employees')) || [];
   const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
 
+  const departmentSelect = document.getElementById('department');
+  const departamentos = JSON.parse(localStorage.getItem('departamentos')) || [];
+
   // Renderizar la tabla de empleados
   const renderTable = () => {
     employeeTable.innerHTML = '';
@@ -15,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${employee.id}</td>
                 <td>${employee.name}</td>
                 <td>${employee.role}</td>
+                <td>${employee.departmentName || 'No asignado'}</td>
                 <td>
                     <button class="btn edit" data-index="${index}">Modificar</button>
                     <button class="btn delete" data-index="${index}">Eliminar</button>
@@ -48,16 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         : Date.now().toString();
     const name = document.getElementById('name').value;
     const role = document.getElementById('role').value;
+    const departmentId = departmentSelect.value;
+    const departmentName = departmentSelect.options[departmentSelect.selectedIndex].textContent;
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
     if (form.dataset.editing === 'true') {
       const index = form.dataset.index;
-      employees[index] = { id, name, role, username, password };
-      accounts[index] = { username, password, name, role }; // Actualizar cuenta
+      employees[index] = { id, name, role, departmentId, departmentName, username, password };
+      accounts[index] = { username, password, name, role, departmentName }; // Actualizar cuenta
     } else {
-      employees.push({ id, name, role, username, password });
-      accounts.push({ username, password, name, role }); // Nueva cuenta
+      employees.push({ id, name, role, departmentId, departmentName, username, password });
+      accounts.push({ username, password, name, role, departmentName }); // Nueva cuenta
     }
 
     localStorage.setItem('employees', JSON.stringify(employees));
@@ -75,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('name').value = employee.name;
       document.getElementById('role').value = employee.role;
+      departmentSelect.value = employee.departmentId;
       document.getElementById('username').value = employee.username;
       document.getElementById('password').value = employee.password;
 
@@ -94,4 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderTable();
+
+    // Cargar departamentos en el `select`
+    const loadDepartments = () => {
+      departmentSelect.innerHTML = '<option value="" disabled selected>Seleccione un departamento</option>';
+      departamentos.forEach((departamento) => {
+        const option = document.createElement('option');
+        option.value = departamento.id;
+        option.textContent = departamento.nombre;
+        departmentSelect.appendChild(option);
+      });
+    };
+
+    loadDepartments();
 });
