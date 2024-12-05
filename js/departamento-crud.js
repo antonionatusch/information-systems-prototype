@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Guardar o actualizar tipo de vacación al enviar el formulario
+    // Guardar o actualizar departamento al enviar el formulario
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Si no se está editando, agregar un nuevo tipo
             departamentos.push(nuevoDepartamento);
             agregarFila(nuevoDepartamento, departamentos.length - 1);
-            alert('Tipo de vacación creado correctamente.');
+            alert('departamento creado correctamente.');
         } else {
             // Si se está editando, actualizar los datos
             departamentos[editingIndex] = nuevoDepartamento;
             actualizarFila(nuevoDepartamento, editingIndex);
-            alert('Tipo de vacación modificado correctamente.');
+            alert('departamento modificado correctamente.');
         }
 
         // Guardar en localStorage
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Botón "Eliminar"
         newRow.querySelector('.btn-delete').addEventListener('click', function () {
-            if (confirm('¿Estás seguro de que deseas eliminar este tipo de vacación?')) {
+            if (confirm('¿Estás seguro de que deseas eliminar este departamento?')) {
                 eliminarFila(index);
                 newRow.remove();
             }
