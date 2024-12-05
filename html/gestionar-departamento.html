@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Departamentos</title>
+    <link rel="stylesheet" href="../css/homestyles.css">
+    <link rel="stylesheet" href="../css/crudtipopermisostyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="gestionar-empleado.html">Empleados</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="table-container">
+            <h2>Departamentos</h2>
+            <button id="btn-create" class="button btn-create">Crear Departamento</button>
+            <table id="table-requests" class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--  -->
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="form-modal" class="form-modal">
+            <div class="modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <h2>Crear Departamento</h2>
+                <form id="form-department">
+                    <label for="id">Código:</label>
+                    <input type="text" id="id" name="id" required>
+
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="description">Descripción:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="btn-send">Enviar</button>
+                        <button type="button" class="btn-cancel" onclick="window.location.href='./gestionar-departamento.html'">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/departamento-crud.js"></script>
+</body>
+</html>

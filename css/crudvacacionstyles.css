@@ -1,0 +1,207 @@
+/* Table Container */
+.table-container {
+    margin: 50px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.styled-table thead {
+    background-color: #00457C;
+    color: white;
+}
+
+.styled-table thead th {
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+.styled-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+.styled-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-approve {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-approve:hover {
+    background-color: #218838;
+}
+
+.btn-reject {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-reject:hover {
+    background-color: #c82333;
+}
+
+.btn-modify {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-modify:hover {
+    background-color: #218838;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.btn-create {
+    padding: 10px;
+    background-color: #00457C;
+    color: #fff;
+}
+
+.btn-create:hover {
+    background-color: #00325a;
+    color: #fff;
+}
+
+
+/* Form Modal */
+.form-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 2% auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    width: 35%;
+    height: 100%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.form-modal h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+}
+
+.form-modal .close {
+    margin-top: 0;
+    float: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: red;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+form label {
+    flex: 1;
+    text-align: start;
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input, form textarea, form select {
+    width: calc(100% - 0px);
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+form textarea {
+    resize: none;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-send {
+    background-color: #007bbb;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    flex: 1;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.btn-send:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    flex: 1;
+    text-align: center;
+}
+
+.btn-cancel:hover {
+    background-color: #aaa;
+}

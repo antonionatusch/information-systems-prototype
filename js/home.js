@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const gestionarEmpleadoLink = document.getElementById(
     'gestionar-empleado-link',
   );
+  const gestionarDepartamentoLink = document.getElementById(
+    'gestionar-departamento-link',
+  );
 
   if (currentUser) {
     // Mostrar enlaces para usuarios autenticados
@@ -14,13 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mostrar enlace "Gestionar Empleados" solo para Gerente Administrativo
     if (currentUser.role === 'Gerente Administrativo') {
       gestionarEmpleadoLink.style.display = 'block';
+      gestionarDepartamentoLink.style.display = 'block';
     } else {
       gestionarEmpleadoLink.style.display = 'none';
+      gestionarDepartamentoLink.style.display = 'none';
     }
   } else {
     // Ocultar enlaces si no hay usuario autenticado
     logoutLink.style.display = 'none';
     gestionarEmpleadoLink.style.display = 'none';
+    gestionarDepartamentoLink.style.display = 'none';
     loginLink.style.display = 'block';
   }
 
