@@ -4,32 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.querySelector('.close');
     const btnCreate = document.getElementById('create-new');
     const tableBody = document.getElementById('responsable-table');
-    const empresaSelect = document.getElementById('empresa');
 
     let responsables = JSON.parse(localStorage.getItem('responsables')) || [];
-    let empresas = JSON.parse(localStorage.getItem('empresas')) || [];
     let editingIndex = null; // Índice para edición
-
-    // Poblar el selector de empresas con múltiples opciones
-    function populateEmpresaSelect(selectedEmpresas = []) {
-        empresaSelect.innerHTML = '';
-        empresas.forEach(empresa => {
-            const option = document.createElement('option');
-            option.value = empresa.nombre;
-            option.textContent = empresa.nombre;
-            if (selectedEmpresas.includes(empresa.nombre)) {
-                option.selected = true;
-            }
-            empresaSelect.appendChild(option);
-        });
-    }
 
     // Mostrar modal para crear responsable
     btnCreate.addEventListener('click', () => {
         modal.style.display = 'flex';
         form.reset();
         editingIndex = null;
-        populateEmpresaSelect();
     });
 
     // Cerrar modal
@@ -51,9 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const nombre = document.getElementById('nombre').value;
         const email = document.getElementById('email').value;
         const telefono = document.getElementById('telefono').value;
-        const empresasSeleccionadas = Array.from(empresaSelect.selectedOptions).map(option => option.value);
 
-        const nuevoResponsable = { nombre, email, telefono, empresas: empresasSeleccionadas };
+        const nuevoResponsable = { nombre, email, telefono };
 
         if (editingIndex === null) {
             responsables.push(nuevoResponsable);
@@ -77,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${responsable.nombre}</td>
             <td>${responsable.email}</td>
             <td>${responsable.telefono}</td>
-            <td>${responsable.empresas.join(', ')}</td>
             <td>
                 <button class="btn btn-modify">Modificar</button>
                 <button class="btn btn-delete">Eliminar</button>
@@ -107,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('nombre').value = responsable.nombre;
         document.getElementById('email').value = responsable.email;
         document.getElementById('telefono').value = responsable.telefono;
-        populateEmpresaSelect(responsable.empresas);
         editingIndex = index;
     }
 
@@ -118,10 +98,8 @@ document.addEventListener('DOMContentLoaded', function () {
         row.cells[0].textContent = responsable.nombre;
         row.cells[1].textContent = responsable.email;
         row.cells[2].textContent = responsable.telefono;
-        row.cells[3].textContent = responsable.empresas.join(', ');
     }
 
     // Inicializar tabla
     responsables.forEach((responsable, index) => agregarFila(responsable, index));
-    populateEmpresaSelect();
 });
