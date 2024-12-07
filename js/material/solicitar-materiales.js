@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     requesterField.value = currentUser.name;
   } else {
     alert('No hay un usuario autenticado. Por favor, inicia sesión.');
-    window.location.href = '../html/login.html';
+    window.location.href = '../../html/login.html';
     return;
   }
 
