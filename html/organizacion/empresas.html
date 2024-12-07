@@ -1,69 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Empresas</title>
+    <title>Empresas</title>
     <link rel="stylesheet" href="../../css/homestyles.css">
-    <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
-
 <body>
     <header>
         <nav class="navbar">
-            <h1>Gestionar Empresas</h1>
+            <h1>Gestión de Empresas</h1>
         </nav>
     </header>
     <main>
-        <div class="crud-container">
-            <div class="action-buttons">
-                <button id="create-new" class="btn">Crear Empresa</button>
-                <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al
-                    Inicio</button>
-
+        <div class="menu-container">
+            <div class="menu-card">
+                <h2>Gestionar Empresas</h2>
+                <p>Gestiona la información de las empresas registradas en el sistema.</p>
+                <button onclick="window.location.href='gestionar-empresas.html'" class="btn">Ir</button>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Dirección</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Contacto</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="empresa-table"></tbody>
-            </table>
-        </div>
-        <div id="form-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Crear/Modificar Empresa</h3>
-                <form id="empresa-form">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" required>
-
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required>
-
-                    <label for="contacto">Persona de Contacto:</label>
-                    <input type="text" id="contacto" name="contacto" required>
-
-                    <button type="submit">Guardar</button>
-                    <button type="button" id="cancel-button">Cancelar</button>
-                </form>
+            <div class="menu-card">
+                <h2>Gestionar Responsables de Empresas</h2>
+                <p>Administra los responsables asignados a las empresas para un correcto seguimiento.</p>
+                <button onclick="window.location.href='gestionar-responsables.html'" class="btn">Ir</button>
             </div>
         </div>
     </main>
-    <script src="../../js/organizacion/empresa-crud.js"></script>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
 </body>
-
 </html>
