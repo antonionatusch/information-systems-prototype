@@ -4,25 +4,36 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.querySelector('.close');
     const btnCreate = document.getElementById('create-new');
     const tableBody = document.getElementById('empresa-table');
-    const cancelButton = document.getElementById('cancel-button');
+    const responsablesSelect = document.getElementById('responsables');
 
     let empresas = JSON.parse(localStorage.getItem('empresas')) || [];
-    let editingIndex = null; // Índice para rastrear la fila que se está editando
+    let responsables = JSON.parse(localStorage.getItem('responsables')) || [];
+    let editingIndex = null; // Índice para edición
 
-    // Mostrar modal al hacer clic en "Crear Empresa"
+    // Poblar el selector de responsables
+    function populateResponsablesSelect(selectedResponsable = "") {
+        responsablesSelect.innerHTML = '';
+        responsables.forEach(responsable => {
+            const option = document.createElement('option');
+            option.value = responsable.nombre;
+            option.textContent = responsable.nombre;
+            if (selectedResponsable === responsable.nombre) {
+                option.selected = true;
+            }
+            responsablesSelect.appendChild(option);
+        });
+    }
+
+    // Mostrar modal para crear empresa
     btnCreate.addEventListener('click', () => {
         modal.style.display = 'flex';
         form.reset();
-        editingIndex = null; // Restablecer el índice de edición
+        editingIndex = null;
+        populateResponsablesSelect();
     });
 
-    // Cerrar modal al hacer clic en la "X"
+    // Cerrar modal
     closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    // Cerrar modal al hacer clic en "Cancelar"
-    cancelButton.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
@@ -33,43 +44,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Guardar o actualizar empresa al enviar el formulario
+    // Guardar o editar empresa
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        // Capturar valores del formulario
-        const nombre = document.getElementById('nombre').value.trim();
-        const direccion = document.getElementById('direccion').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const telefono = document.getElementById('telefono').value.trim();
-        const contacto = document.getElementById('contacto').value.trim();
+        const nombre = document.getElementById('nombre').value;
+        const direccion = document.getElementById('direccion').value;
+        const email = document.getElementById('email').value;
+        const telefono = document.getElementById('telefono').value;
+        const responsableSeleccionado = responsablesSelect.value;
 
-        const nuevaEmpresa = { nombre, direccion, email, telefono, contacto };
+        const nuevaEmpresa = { nombre, direccion, email, telefono, responsable: responsableSeleccionado };
 
         if (editingIndex === null) {
-            // Si no se está editando, agregar una nueva empresa
             empresas.push(nuevaEmpresa);
             agregarFila(nuevaEmpresa, empresas.length - 1);
             alert('Empresa creada correctamente.');
         } else {
-            // Si se está editando, actualizar los datos
             empresas[editingIndex] = nuevaEmpresa;
             actualizarFila(nuevaEmpresa, editingIndex);
             alert('Empresa modificada correctamente.');
         }
 
-        // Guardar en localStorage
         localStorage.setItem('empresas', JSON.stringify(empresas));
-
-        // Limpiar y cerrar el formulario
         form.reset();
         modal.style.display = 'none';
     });
 
-    // Cargar filas existentes al inicio
-    empresas.forEach((empresa, index) => agregarFila(empresa, index));
-
-    // Función para agregar una fila a la tabla
+    // Agregar fila a la tabla
     function agregarFila(empresa, index) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
@@ -77,22 +79,23 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${empresa.direccion}</td>
             <td>${empresa.email}</td>
             <td>${empresa.telefono}</td>
-            <td>${empresa.contacto}</td>
+            <td>${empresa.responsable}</td>
             <td>
-                <button class="button btn-modify">Modificar</button>
-                <button class="button btn-delete">Eliminar</button>
+                <button class="btn btn-modify">Modificar</button>
+                <button class="btn btn-delete">Eliminar</button>
             </td>
         `;
 
-        // Botón "Modificar"
-        newRow.querySelector('.btn-modify').addEventListener('click', function () {
+        // Botón modificar
+        newRow.querySelector('.btn-modify').addEventListener('click', () => {
             abrirParaEditar(empresa, index);
         });
 
-        // Botón "Eliminar"
-        newRow.querySelector('.btn-delete').addEventListener('click', function () {
+        // Botón eliminar
+        newRow.querySelector('.btn-delete').addEventListener('click', () => {
             if (confirm('¿Estás seguro de que deseas eliminar esta empresa?')) {
-                eliminarFila(index);
+                empresas.splice(index, 1);
+                localStorage.setItem('empresas', JSON.stringify(empresas));
                 newRow.remove();
             }
         });
@@ -100,18 +103,18 @@ document.addEventListener('DOMContentLoaded', function () {
         tableBody.appendChild(newRow);
     }
 
-    // Función para abrir el modal y rellenar el formulario para edición
+    // Abrir modal para editar
     function abrirParaEditar(empresa, index) {
         modal.style.display = 'flex';
         document.getElementById('nombre').value = empresa.nombre;
         document.getElementById('direccion').value = empresa.direccion;
         document.getElementById('email').value = empresa.email;
         document.getElementById('telefono').value = empresa.telefono;
-        document.getElementById('contacto').value = empresa.contacto;
-        editingIndex = index; // Guardar el índice de la fila que se está editando
+        populateResponsablesSelect(empresa.responsable);
+        editingIndex = index;
     }
 
-    // Función para actualizar una fila en la tabla
+    // Actualizar fila
     function actualizarFila(empresa, index) {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
@@ -119,12 +122,10 @@ document.addEventListener('DOMContentLoaded', function () {
         row.cells[1].textContent = empresa.direccion;
         row.cells[2].textContent = empresa.email;
         row.cells[3].textContent = empresa.telefono;
-        row.cells[4].textContent = empresa.contacto;
+        row.cells[4].textContent = empresa.responsable;
     }
 
-    // Función para eliminar una fila de localStorage
-    function eliminarFila(index) {
-        empresas.splice(index, 1); // Eliminar del array
-        localStorage.setItem('empresas', JSON.stringify(empresas)); // Guardar cambios
-    }
+    // Inicializar tabla
+    empresas.forEach((empresa, index) => agregarFila(empresa, index));
+    populateResponsablesSelect();
 });
