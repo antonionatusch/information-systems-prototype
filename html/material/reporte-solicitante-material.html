@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte por Tipo de Material</title>
-    <link rel="stylesheet" href="../css/ordermaterialstyles.css">
+    <title>Reporte por Solicitante</title>
+    <link rel="stylesheet" href="../../css/material/ordermaterialstyles.css">
 </head>
 <body>
     <header>
@@ -17,12 +17,12 @@
     </header>
     <main>
         <section class="crud-container">
-            <h2>Reporte de Solicitudes por Tipo de Material</h2>
-            <form id="reporte-tipo-form" class="form-grid">
+            <h2>Reporte de Solicitudes por Solicitante</h2>
+            <form id="reporte-form" class="form-grid">
                 <div class="form-group">
-                    <label for="tipo-material">Tipo de Material</label>
-                    <select id="tipo-material" required>
-                        <option value="" disabled selected>Seleccione un tipo</option>
+                    <label for="solicitante">Solicitante</label>
+                    <select id="solicitante" required>
+                        <option value="" disabled selected>Seleccione un empleado</option>
                         <!-- Opciones dinámicas desde localStorage -->
                     </select>
                 </div>
@@ -43,6 +43,6 @@
     <footer>
         <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
     </footer>
-    <script src="../js/reporte-tipo-material.js"></script>
+    <script src="../../js/material/reporte-solicitante-material.js"></script>
 </body>
 </html>

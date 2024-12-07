@@ -8,25 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const gestionarDepartamentoLink = document.getElementById(
     'gestionar-departamento-link',
   );
+  const empresasLink = document.getElementById('empresas-link');
 
   if (currentUser) {
     // Mostrar enlaces para usuarios autenticados
     logoutLink.style.display = 'block';
     loginLink.style.display = 'none';
 
-    // Mostrar enlace "Gestionar Empleados" solo para Gerente Administrativo
+    // Mostrar enlaces de gestión solo para Gerente Administrativo
     if (currentUser.role === 'Gerente Administrativo') {
       gestionarEmpleadoLink.style.display = 'block';
       gestionarDepartamentoLink.style.display = 'block';
+      empresasLink.style.display = 'block';
     } else {
       gestionarEmpleadoLink.style.display = 'none';
       gestionarDepartamentoLink.style.display = 'none';
+      empresasLink.style.display = 'none';
     }
   } else {
     // Ocultar enlaces si no hay usuario autenticado
     logoutLink.style.display = 'none';
     gestionarEmpleadoLink.style.display = 'none';
     gestionarDepartamentoLink.style.display = 'none';
+    empresasLink.style.display = 'none';
     loginLink.style.display = 'block';
   }
 
