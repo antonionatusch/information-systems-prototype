@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Vacaciones</title>
-    <link rel="stylesheet" href="../css/homestyles.css">
-    <link rel="stylesheet" href="../css/crudtipovacacionstyles.css">
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/crudtipopermisostyles.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo-container">
                 <h1>ASIMCO S.R.L.</h1>
-                <img src="../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+                <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
             </div>
             <ul class="nav-links">
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="gestionar-vacacion.html">Vacaciones</a></li>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="gestionar-permiso.html">Permisos</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section class="table-container">
-            <h2>Tipos de Vacación</h2>
-            <button id="btn-create" class="button btn-create">Crear Tipo de Vacación</button>
+            <h2>Tipos de Permisos</h2>
+            <button id="btn-create" class="button btn-create">Crear Tipo de Permiso</button>
             <table id="table-requests" class="styled-table">
                 <thead>
                     <tr>
@@ -45,8 +45,8 @@
         <div id="form-modal" class="form-modal">
             <div class="modal-content">
                 <span id="close-modal" class="close">&times;</span>
-                <h2>Crear Tipo de Vacación</h2>
-                <form id="form-vacation">
+                <h2>Crear Tipo de Permiso</h2>
+                <form id="form-permit">
                     <label for="id">Código:</label>
                     <input type="text" id="id" name="id" required>
 
@@ -57,8 +57,8 @@
                     <textarea id="description" name="description" rows="4" required></textarea>
                     
                     <div class="form-footer">
-                        <button type="submit" class="btn-send">Enviar Solicitud</button>
-                        <button type="button" class="btn-cancel" onclick="window.location.href='./vacaciones.html'">Cancelar</button>
+                        <button type="submit" class="btn-send">Enviar</button>
+                        <button type="button" class="btn-cancel" onclick="window.location.href='./gestionar-tipo-permiso.html'">Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -67,6 +67,6 @@
     <footer>
         <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
     </footer>
-    <script src="../js/tipo-vacacion-crud.js"></script>
+    <script src="../../js/permisos-vacaciones/tipo-permiso-crud.js"></script>
 </body>
 </html>

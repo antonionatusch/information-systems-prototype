@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.dataset.editing = false;
   });
   document.getElementById('back-to-home').addEventListener('click', () => {
-    window.location.href = '../index.html'; // Redirige al archivo del index
+    window.location.href = '../../index.html'; // Redirige al archivo del index
   });
 
   // Cerrar el modal
