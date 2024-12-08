@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Vacaciones</title>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/correspondencia/crudcorrespondenciarecibidastyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="correspondencia.html">Correspondencia</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+
+        <section class="table-container">
+            <h2>Registradas Recientemente</h2>
+            <button id="btn-create" class="button btn-create">Ingresar Correspondencia</button>
+            <table id="table-requests" class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Remitente</th>
+                        <th>Asunti</th>
+                        <th>Fecha</th>
+                        <th>Hora Inicio</th>
+                        <th>Destinatario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--  -->
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="form-modal" class="form-modal">
+            <div class="modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <h2>Registrar</h2>
+                <form id="form-vacation">
+                    <label for="id">Código:</label>
+                    <input type="text" id="id" name="id" required>
+
+                    <label for="sender">Remitente:</label>
+                    <input type="text" id="sender" name="sender" required>
+
+                    <label for="subjet">Asunto:</label>
+                    <input type="text" id="subjet" name="subjet" required>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="start-date">Fecha:</label>
+                            <input type="date" id="start-date" name="start-date" required>
+                        </div>
+                        <div>
+                            <label for="start-time">Hora:</label>
+                            <input type="time" id="start-time" name="start-time" required>
+                        </div>
+                    </div>
+
+                    <label for="destined">Destinatario:</label>
+                    <input type="text" id="destined" name="destined" required>
+
+                    <label for="attach" class="file-upload">Adjuntar</label>
+                    <input type="file" id="attach" name="attach" required>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="btn-send">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../../js/correspondencia/correspondencia-recibida-crud.js"></script>
+</body>
+</html>
