@@ -32,10 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
+        const unidad = document.getElementById('unidad').value;
+        const cargo = document.getElementById('cargo').value;
         const telefono = document.getElementById('telefono').value;
 
-        const nuevoResponsable = { nombre, email, telefono };
+        const nuevoResponsable = { nombre, unidad, cargo, telefono };
 
         if (editingIndex === null) {
             responsables.push(nuevoResponsable);
@@ -57,7 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
             <td>${responsable.nombre}</td>
-            <td>${responsable.email}</td>
+            <td>${responsable.unidad}</td>
+            <td>${responsable.cargo}</td>
             <td>${responsable.telefono}</td>
             <td>
                 <button class="btn btn-modify">Modificar</button>
@@ -86,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function abrirParaEditar(responsable, index) {
         modal.style.display = 'flex';
         document.getElementById('nombre').value = responsable.nombre;
-        document.getElementById('email').value = responsable.email;
+        document.getElementById('unidad').value = responsable.unidad;
+        document.getElementById('cargo').value = responsable.cargo;
         document.getElementById('telefono').value = responsable.telefono;
         editingIndex = index;
     }
@@ -96,8 +99,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
         row.cells[0].textContent = responsable.nombre;
-        row.cells[1].textContent = responsable.email;
-        row.cells[2].textContent = responsable.telefono;
+        row.cells[1].textContent = responsable.unidad;
+        row.cells[2].textContent = responsable.cargo;
+        row.cells[3].textContent = responsable.telefono;
     }
 
     // Inicializar tabla
