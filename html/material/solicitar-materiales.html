@@ -29,6 +29,11 @@
       <h2>Solicitar Materiales</h2>
       <form id="request-form" class="form-grid">
         <div class="form-group">
+          <label for="request-code">Código de Solicitud:</label>
+          <input type="text" id="request-code" readonly>
+        </div>
+
+        <div class="form-group">
           <label for="material">Material:</label>
           <select id="material" required></select>
         </div>
@@ -52,20 +57,22 @@
           <button type="submit" class="btn">Solicitar</button>
         </div>
       </form>
-      <table>
-        <thead>
-          <tr>
-            <th>Material</th>
-            <th>Cantidad</th>
-            <th>Unidad</th>
-            <th>Solicitante</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="requests-table"></tbody>
-      </table>
+<table>
+  <thead>
+    <tr>
+      <th>Código de Solicitud</th>
+      <th>Material</th>
+      <th>Cantidad</th>
+      <th>Unidad</th>
+      <th>Solicitante</th>
+      <th>Fecha</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="requests-table"></tbody>
+</table>
+
 
     </div>
   </main>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionar Compras</title>
+  <link rel="stylesheet" href="../../css/homestyles.css">
+  <link rel="stylesheet" href="../../css/crudstyles.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Gestionar Compras</h1>
+    </nav>
+  </header>
+  <main>
+    <div class="crud-container">
+      <div class="action-buttons">
+        <button id="create-new" class="btn">Registrar Compra</button>
+        <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al
+          Inicio</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código Orden</th>
+            <th>Código Compra</th>
+            <th>Monto</th>
+            <th>Detalle</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="compras-table"></tbody>
+      </table>
+    </div>
+    <div id="form-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Registrar/Modificar Compra</h3>
+        <form id="compra-form">
+          <label for="codigo-orden">Código Orden de Compra:</label>
+          <input type="text" id="codigo-orden" required>
+
+          <label for="codigo-compra">Código de la Compra:</label>
+          <input type="text" id="codigo-compra" required>
+
+          <label for="monto">Monto:</label>
+          <input type="number" id="monto" required>
+
+          <label for="detalle">Detalle:</label>
+          <textarea id="detalle" required></textarea>
+
+          <label for="fecha">Fecha:</label>
+          <input type="date" id="fecha" required>
+
+          <button type="submit">Guardar</button>
+          <button type="button" id="cancel-button">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+  </footer>
+  <script src="../../js/material/compras-crud.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Asunto</title>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/crudstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>Gestionar Asuntos</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="crud-container">
+            <div class="action-buttons">
+                <button id="create-new" class="btn">Crear Asunto</button>
+                <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al Inicio</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="asunto-table"></tbody>
+            </table>
+        </div>
+        <div id="form-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Crear/Modificar Asunto</h3>
+                <form id="asunto-form">
+                    <label for="codigo">Código:</label>
+                    <input type="text" id="codigo" name="codigo" required>
+
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" required></textarea>
+
+                    <button type="submit" class="btn">Guardar</button>
+                    <button type="button" id="cancel-button" class="btn">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="../../js/organizacion/asunto-crud.js"></script>
+</body>
+</html>
