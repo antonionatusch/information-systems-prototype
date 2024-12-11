@@ -22,10 +22,12 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nombre</th>
+                        <th>Carnet</th>
+                        <th>Fecha de Ingreso</th>
+                        <th>Fecha de Nacimiento</th>
                         <th>Cargo</th>
-                        <th>Departamento</th>
+                        <th>Unidad</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -40,15 +42,22 @@
                 <label for="name">Nombre:</label>
                 <input type="text" id="name" name="name" required>
 
+                <label for="carnet">Carnet:</label>
+                <input type="text" id="carnet" name="carnet" required>
+
+                <label for="hire-date">Fecha de Ingreso:</label>
+                <input type="date" id="hire-date" name="hire-date" required>
+
+                <label for="birth-date">Fecha de Nacimiento:</label>
+                <input type="date" id="birth-date" name="birth-date" required>
+
                 <label for="role">Cargo:</label>
                 <input type="text" id="role" name="role" required>
 
-                <label for="department">Departamento:</label>
-                <select id="department" name="department" required>
-                    <option value="" disabled selected></option>
-                </select>
+                <label for="unit">Unidad:</label>
+                <input type="text" id="unit" name="unit" required>
 
-                <label for="username">Nombre de usuario:</label>
+                <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" required>
 
                 <label for="password">Contraseña:</label>
@@ -58,7 +67,6 @@
             </form>
           </div>
       </div>
-
     </main>
     <script src="../../js/organizacion/empleados-crud.js"></script>
 </body>

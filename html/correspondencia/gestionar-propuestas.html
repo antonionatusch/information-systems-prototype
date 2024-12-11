@@ -4,36 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Propuestas</title>
-    <link rel="stylesheet" href="../css/homestyles.css">
-    <link rel="stylesheet" href="../css/correspondenciastyles.css">
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <h1>Gestionar Propuestas de Auditoría</h1>
+            <h1>Gestionar Propuestas</h1>
         </nav>
     </header>
     <main>
         <div class="crud-container">
             <div class="action-buttons">
-                <button id="create-new" class="btn">Registrar Propuesta</button>
+                <button id="create-new" class="btn">Crear Propuesta</button>
                 <button id="back-to-home" class="btn">Volver al Inicio</button>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Fecha Salida</th>
-                        <th>Hora Salida</th>
-                        <th>Destinatario</th>
-                        <th>Asunto</th>
-                        <th>Despachante</th>
                         <th>Tipo</th>
-                        <th>Monto</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
+                        <th>Contrato</th>
+                        <th>Destinatario</th>
                         <th>Responsable</th>
-                        <th>Tipo Contrato</th>
+                        <th>Monto</th>
+                        <th>Fechas</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -43,50 +38,37 @@
         <div id="form-modal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h3>Registrar/Modificar Propuesta</h3>
+                <h3>Crear/Modificar Propuesta</h3>
                 <form id="propuesta-form">
                     <label for="codigo">Código:</label>
                     <input type="text" id="codigo" name="codigo" required>
 
-                    <label for="fecha-salida">Fecha Salida:</label>
-                    <input type="date" id="fecha-salida" name="fecha-salida" required>
+                    <label for="tipo">Tipo de Propuesta:</label>
+                    <select id="tipo" name="tipo" required></select>
 
-                    <label for="hora-salida">Hora Salida:</label>
-                    <input type="time" id="hora-salida" name="hora-salida" required>
+                    <!-- <label for="contrato">Contrato:</label> -->
+                    <!-- <select id="contrato" name="contrato" required></select> -->
 
                     <label for="destinatario">Destinatario:</label>
                     <input type="text" id="destinatario" name="destinatario" required>
 
-                    <label for="asunto">Asunto:</label>
-                    <textarea id="asunto" name="asunto" required></textarea>
-
-                    <label for="despachante">Despachante:</label>
-                    <input type="text" id="despachante" name="despachante" required>
-
-                    <label for="tipo">Tipo de Propuesta:</label>
-                    <input type="text" id="tipo" name="tipo" required>
+                    <label for="responsable">Responsable:</label>
+                    <input type="text" id="responsable" name="responsable" required>
 
                     <label for="monto">Monto:</label>
                     <input type="number" id="monto" name="monto" required>
 
-                    <label for="fecha-inicio">Fecha Inicio:</label>
+                    <label for="fecha-inicio">Fecha de Inicio:</label>
                     <input type="date" id="fecha-inicio" name="fecha-inicio" required>
 
-                    <label for="fecha-fin">Fecha Fin:</label>
-                    <input type="date" id="fecha-fin" name="fecha-fin" required>
+                    <label for="fecha-termino">Fecha de Término:</label>
+                    <input type="date" id="fecha-termino" name="fecha-termino" required>
 
-                    <label for="responsable">Responsable:</label>
-                    <input type="text" id="responsable" name="responsable" required>
-
-                    <label for="tipo-contrato">Tipo de Contrato:</label>
-                    <input type="text" id="tipo-contrato" name="tipo-contrato" required>
-
-                    <button type="submit">Guardar</button>
-                    <button type="button" id="cancel-button">Cancelar</button>
+                    <button type="submit" class="btn">Guardar</button>
                 </form>
             </div>
         </div>
     </main>
-    <script src="../js/gestionar-propuestas.js"></script>
+    <script src="../../js/correspondencia/gestionar-propuestas.js"></script>
 </body>
 </html>
