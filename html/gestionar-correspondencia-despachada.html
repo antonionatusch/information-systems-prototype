@@ -25,7 +25,7 @@
       <table>
         <thead>
           <tr>
-            <th>Código</th>
+            <th>Código correlativo</th>
             <th>Fecha</th>
             <th>Hora</th>
             <th>Asunto</th>
@@ -42,7 +42,7 @@
         <span class="close">&times;</span>
         <h3>Registrar/Modificar Correspondencia Despachada</h3>
         <form id="correspondencia-despachada-form">
-          <label for="codigo">Código:</label>
+          <label for="codigo">Código correlativo:</label>
           <input type="text" id="codigo" name="codigo" required>
 
           <label for="fecha">Fecha:</label>
@@ -59,16 +59,16 @@
 
           <label for="destinatario">Destinatario:</label>
           <input type="text" id="destinatario" name="destinatario" required>
-          <div style="text-align: center; margin-top: 20px;">
-            <label for="tipo-interna" style="margin-right: 20px; display: inline-flex; align-items: center;">
-              <input type="radio" id="tipo-interna" name="tipo-correspondencia" value="interna" checked>
-              Interna
-            </label>
-            <label for="tipo-externa" style="display: inline-flex; align-items: center;">
-              <input type="radio" id="tipo-externa" name="tipo-correspondencia" value="externa">
-              Externa
-            </label>
-          </div>
+          <!-- <div style="text-align: center; margin-top: 20px;"> -->
+          <!--   <label for="tipo-interna" style="margin-right: 20px; display: inline-flex; align-items: center;"> -->
+          <!--     <input type="radio" id="tipo-interna" name="tipo-correspondencia" value="interna" checked> -->
+          <!--     Interna -->
+          <!--   </label> -->
+          <!--   <label for="tipo-externa" style="display: inline-flex; align-items: center;"> -->
+          <!--     <input type="radio" id="tipo-externa" name="tipo-correspondencia" value="externa"> -->
+          <!--     Externa -->
+          <!--   </label> -->
+          <!-- </div> -->
           <div class="form-group">
             <button type="button" id="adjuntar" class="btn btn-danger">Adjuntar</button>
           </div>
