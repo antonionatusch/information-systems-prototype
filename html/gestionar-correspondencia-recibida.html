@@ -2,72 +2,86 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Correspondencia Recibida</title>
-    <link rel="stylesheet" href="../css/homestyles.css">
-    <link rel="stylesheet" href="../css/crudstyles.css">
-    <link rel="stylesheet" href="../css/correspondenciastyles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionar Correspondencia</title>
+  <link rel="stylesheet" href="../css/homestyles.css">
+  <link rel="stylesheet" href="../css/crudstyles.css">
+  <link rel="stylesheet" href="../css/correspondenciastyles.css">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <h1>Gestionar Correspondencia Recibida</h1>
-        </nav>
-    </header>
-    <main>
-        <div class="crud-container">
-            <div class="action-buttons">
-                <button id="create-new" class="btn">Registrar Correspondencia</button>
-                <button id="back-to-home" class="btn" onclick="window.location.href='../index.html'">Volver al
-                    Inicio</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Asunto</th>
-                        <th>Remitente</th>
-                        <th>Destinatario</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="correspondencia-table"></tbody>
-            </table>
-        </div>
-        <div id="form-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Registrar/Modificar Correspondencia</h3>
-                <form id="correspondencia-form">
-                    <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" required>
+  <header>
+    <nav class="navbar">
+      <h1>Gestionar Correspondencia</h1>
+    </nav>
+  </header>
+  <main>
+    <div class="crud-container">
+      <div class="action-buttons">
+        <button id="create-new" class="btn">Registrar Correspondencia</button>
+        <button id="back-to-home" class="btn" onclick="window.location.href='../index.html'">Volver al Inicio</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Asunto</th>
+            <th>Remitente</th>
+            <th>Destinatario</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="correspondencia-table"></tbody>
+      </table>
+    </div>
 
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" required>
+    <div id="form-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Registrar/Modificar Correspondencia Recibida</h3>
+        <form id="correspondencia-form">
+          <label for="codigo">Código:</label>
+          <input type="text" id="codigo" name="codigo" required>
 
-                    <label for="hora">Hora:</label>
-                    <input type="time" id="hora" name="hora" required>
+          <label for="fecha">Fecha:</label>
+          <input type="date" id="fecha" name="fecha" required>
 
-                    <label for="asunto" id="asunto-container">Asunto:</label>
-                    <textarea id="asunto" name="asunto" required></textarea>
-                    <label for="remitente">Remitente:</label>
-                    <input type="text" id="remitente" name="remitente" required>
+          <label for="hora">Hora:</label>
+          <input type="time" id="hora" name="hora" required>
 
+          <label for="asunto">Asunto:</label>
+          <textarea id="asunto" name="asunto" required></textarea>
 
-                    <label for="destinatario">Destinatario:</label>
-                    <input type="text" id="destinatario" name="destinatario" required>
+          <label for="remitente">Remitente: </label>
+          <input type="text" id="remitente" name="remitente" required>
 
-                    <button type="submit">Guardar</button>
-                    <button type="button" id="cancel-button">Cancelar</button>
-                </form>
-            </div>
-        </div>
-    </main>
-    <script src="../js/correspondencia-recibida-crud.js"></script>
+          <label for="destinatario">Destinatario:</label>
+          <input type="text" id="destinatario" name="destinatario" required>
+
+          <!-- Tipo de Correspondencia -->
+          <div style="text-align: center; margin-top: 20px;">
+            <label for="tipo-interna" style="margin-right: 20px; display: inline-flex; align-items: center;">
+              <input type="radio" id="tipo-interna" name="tipo-correspondencia" value="interna" checked>
+              Interna
+            </label>
+            <label for="tipo-externa" style="display: inline-flex; align-items: center;">
+              <input type="radio" id="tipo-externa" name="tipo-correspondencia" value="externa">
+              Externa
+            </label>
+          </div>
+
+          <!-- Botones -->
+          <button type="submit" class="btn">Guardar</button>
+          <button type="button" id="cancel-button" class="btn">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="../js/correspondencia-recibida-crud.js"></script>
 </body>
 
 </html>
