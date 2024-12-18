@@ -37,23 +37,40 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h3>Registrar Despacho</h3>
+
                 <form id="despacho-form">
-                    <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" required>
+                    <label for="codigo-correspondencia">Código correlativo de la Correspondencia:</label>
+                    <select id="codigo-correspondencia" name="codigo-correspondencia" required></select>
+
+                    <label for="fecha-correspondencia">Fecha de la Correspondencia:</label>
+                    <input type="date" id="fecha-correspondencia" name="fecha-correspondencia" readonly>
+
+                    <label for="hora-correspondencia">Hora de la Correspondencia:</label>
+                    <input type="time" id="hora-correspondencia" name="hora-correspondencia" readonly>
+
+                    <label for="asunto">Asunto:</label>
+                    <input type="text" id="asunto" name="asunto" readonly>
+
+                    <label for="despachante">Despachante:</label>
+                    <input type="text" id="remitente" name="remitente" readonly>
+
+                    <label for="destinatario">Unidad destinataria:</label>
+                    <input type="text" id="destinatario" name="destinatario" readonly>
+
+                    <label for="depositante">Depositante:</label>
+                    <input type="text" id="depositante" name="depositante" required>
 
                     <label for="receptor">Receptor:</label>
                     <input type="text" id="receptor" name="receptor" required>
 
-                    <label for="despachante">Despachante:</label>
-                    <input type="text" id="despachante" name="despachante" required>
+                    <label for="fecha-entrega">Fecha de la Entrega:</label>
+                    <input type="date" id="fecha-entrega" name="fecha-entrega" required>
 
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" required>
+                    <label for="hora-entrega">Hora de la Entrega:</label>
+                    <input type="time" id="hora-entrega" name="hora-entrega" required>
 
-                    <label for="hora">Hora:</label>
-                    <input type="time" id="hora" name="hora" required>
-
-                    <button type="submit" class="btn">Registrar</button>
+                    <button type="submit" class="btn">Guardar</button>
+                    <button type="button" id="cancel-button" class="btn">Cancelar</button>
                 </form>
             </div>
         </div>
