@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Despacho</title>
+    <title>Gestionar Despachos</title>
     <link rel="stylesheet" href="../../css/homestyles.css">
     <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar">
@@ -16,7 +18,7 @@
     <main>
         <div class="crud-container">
             <div class="action-buttons">
-                <button id="create-new" class="btn">Registrar Despacho</button>
+                <button id="create-new" class="btn">Crear Despacho</button>
                 <button id="back-to-home" class="btn">Volver al Inicio</button>
             </div>
             <table>
@@ -24,57 +26,58 @@
                     <tr>
                         <th>Código</th>
                         <th>Receptor</th>
-                        <th>Despachante</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
+                        <th>Depositante</th>
+                        <th>Fecha Entrega</th>
+                        <th>Hora Entrega</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="despachos-table"></tbody>
+                <tbody id="despacho-table"></tbody>
             </table>
         </div>
+
+        <!-- Modal para crear/modificar despacho -->
         <div id="form-modal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h3>Registrar Despacho</h3>
-
+                <h3>Crear/Modificar Despacho</h3>
                 <form id="despacho-form">
-                    <label for="codigo-correspondencia">Código correlativo de la Correspondencia:</label>
-                    <select id="codigo-correspondencia" name="codigo-correspondencia" required></select>
+                    <label for="codigo-correspondencia">Código Correspondencia:</label>
+                    <select id="codigo-correspondencia" required></select>
 
-                    <label for="fecha-correspondencia">Fecha de la Correspondencia:</label>
-                    <input type="date" id="fecha-correspondencia" name="fecha-correspondencia" readonly>
+                    <label for="fecha-correspondencia">Fecha de Correspondencia:</label>
+                    <input type="date" id="fecha-correspondencia" required>
 
-                    <label for="hora-correspondencia">Hora de la Correspondencia:</label>
-                    <input type="time" id="hora-correspondencia" name="hora-correspondencia" readonly>
+                    <label for="hora-correspondencia">Hora:</label>
+                    <input type="time" id="hora-correspondencia" required>
 
                     <label for="asunto">Asunto:</label>
-                    <input type="text" id="asunto" name="asunto" readonly>
+                    <input type="text" id="asunto" required>
 
                     <label for="despachante">Despachante:</label>
-                    <input type="text" id="remitente" name="remitente" readonly>
+                    <input type="text" id="despachante" required>
 
-                    <label for="destinatario">Unidad destinataria:</label>
-                    <input type="text" id="destinatario" name="destinatario" readonly>
+                    <label for="destinatario">Destinatario:</label>
+                    <input type="text" id="destinatario" required>
 
                     <label for="depositante">Depositante:</label>
-                    <input type="text" id="depositante" name="depositante" required>
+                    <input type="text" id="depositante" required>
 
                     <label for="receptor">Receptor:</label>
-                    <input type="text" id="receptor" name="receptor" required>
+                    <input type="text" id="receptor" required>
 
-                    <label for="fecha-entrega">Fecha de la Entrega:</label>
-                    <input type="date" id="fecha-entrega" name="fecha-entrega" required>
+                    <label for="fecha-entrega">Fecha de Entrega:</label>
+                    <input type="date" id="fecha-entrega" required>
 
-                    <label for="hora-entrega">Hora de la Entrega:</label>
-                    <input type="time" id="hora-entrega" name="hora-entrega" required>
+                    <label for="hora-entrega">Hora de Entrega:</label>
+                    <input type="time" id="hora-entrega" required>
 
                     <button type="submit" class="btn">Guardar</button>
-                    <button type="button" id="cancel-button" class="btn">Cancelar</button>
                 </form>
             </div>
         </div>
     </main>
     <script src="../../js/correspondencia/despacho-crud-tmp.js"></script>
 </body>
+
 </html>
