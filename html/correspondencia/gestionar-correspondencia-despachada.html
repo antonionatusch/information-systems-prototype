@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestionar Correspondencia Despachada</title>
-  <link rel="stylesheet" href="../css/homestyles.css">
-  <link rel="stylesheet" href="../css/correspondenciastyles.css">
-  <link rel="stylesheet" href="../css/crudstyles.css">
+  <link rel="stylesheet" href="../../css/homestyles.css">
+  <link rel="stylesheet" href="../../css/correspondenciastyles.css">
+  <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
 
 <body>
@@ -19,13 +19,13 @@
   <main>
     <div class="crud-container">
       <div class="action-buttons">
-        <button id="create-new" class="btn">Registrar Correspondencia</button>
+        <button id="create-new" class="btn">Crear Correspondencia</button>
         <button id="back-to-home" class="btn">Volver al Inicio</button>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Código correlativo</th>
+            <th>Código</th>
             <th>Fecha</th>
             <th>Hora</th>
             <th>Asunto</th>
@@ -34,15 +34,15 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="correspondencia-despachada-table"></tbody>
+        <tbody id="despachada-table"></tbody>
       </table>
     </div>
     <div id="form-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h3>Registrar/Modificar Correspondencia Despachada</h3>
-        <form id="correspondencia-despachada-form">
-          <label for="codigo">Código correlativo:</label>
+        <h3>Crear/Modificar Correspondencia Despachada</h3>
+        <form id="despachada-form">
+          <label for="codigo">Código:</label>
           <input type="text" id="codigo" name="codigo" required>
 
           <label for="fecha">Fecha:</label>
@@ -51,34 +51,21 @@
           <label for="hora">Hora:</label>
           <input type="time" id="hora" name="hora" required>
 
-          <label for="remitente">Despachante: </label>
-          <input type="text" id="remitente" name="remitente" required>
+          <label for="asunto">Asunto:</label>
+          <input type="text" id="asunto" name="asunto" required>
 
-          <label for="destinatario">Unidad Destinataria: </label>
+          <label for="despachante">Despachante:</label>
+          <input type="text" id="despachante" name="despachante" required>
+
+          <label for="destinatario">Destinatario:</label>
           <input type="text" id="destinatario" name="destinatario" required>
 
-          <label for="destinatario">Responsable empresa:</label>
-          <input type="text" id="responsable" name="responsable" required>
-          <!-- <div style="text-align: center; margin-top: 20px;"> -->
-          <!--   <label for="tipo-interna" style="margin-right: 20px; display: inline-flex; align-items: center;"> -->
-          <!--     <input type="radio" id="tipo-interna" name="tipo-correspondencia" value="interna" checked> -->
-          <!--     Interna -->
-          <!--   </label> -->
-          <!--   <label for="tipo-externa" style="display: inline-flex; align-items: center;"> -->
-          <!--     <input type="radio" id="tipo-externa" name="tipo-correspondencia" value="externa"> -->
-          <!--     Externa -->
-          <!--   </label> -->
-          <!-- </div> -->
-          <div class="form-group">
-            <button type="button" id="adjuntar" class="btn btn-danger">Adjuntar</button>
-          </div>
-          <button type="submit">Guardar</button>
-          <button type="button" id="cancel-button">Cancelar</button>
+          <button type="submit" class="btn">Guardar</button>
         </form>
       </div>
     </div>
   </main>
-  <script src="../js/correspondencia-despachada-crud.js"></script>
+  <script src="../../js/correspondencia-despachada-crud.js"></script>
 </body>
 
 </html>
