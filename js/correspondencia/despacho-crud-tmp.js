@@ -3,16 +3,75 @@ document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById('form-modal');
   const closeModal = document.querySelector('.close');
   const btnCreate = document.getElementById('create-new');
-  const tableBody = document.getElementById('despachos-table');
+  const btnHome = document.getElementById('back-to-home');
+  const tableBody = document.getElementById('despacho-table');
+  const codigoCorrespondenciaSelect = document.getElementById(
+    'codigo-correspondencia',
+  );
+
+  // Campos del formulario
+  const fechaCorrespondenciaInput = document.getElementById(
+    'fecha-correspondencia',
+  );
+  const horaCorrespondenciaInput = document.getElementById(
+    'hora-correspondencia',
+  );
+  const asuntoInput = document.getElementById('asunto');
+  const despachanteInput = document.getElementById('despachante');
+  const destinatarioInput = document.getElementById('destinatario');
+  const depositanteInput = document.getElementById('depositante');
+  const receptorInput = document.getElementById('receptor');
+  const fechaEntregaInput = document.getElementById('fecha-entrega');
+  const horaEntregaInput = document.getElementById('hora-entrega');
 
   let despachos = JSON.parse(localStorage.getItem('despachos')) || [];
-  let editingIndex = null; // Índice para edición
+  let correspondencias =
+    JSON.parse(localStorage.getItem('correspondenciasDespachadas')) || [];
+  let editingIndex = null;
 
-  // Mostrar modal para registrar despacho
+  // Renderizar correspondencias en el selector
+  const populateCorrespondenciaSelect = () => {
+    codigoCorrespondenciaSelect.innerHTML =
+      '<option value="">Seleccione</option>';
+    correspondencias.forEach((correspondencia) => {
+      const option = document.createElement('option');
+      option.value = correspondencia.codigo;
+      option.textContent = `${correspondencia.codigo} - ${correspondencia.asunto}`;
+      codigoCorrespondenciaSelect.appendChild(option);
+    });
+  };
+
+  // Autorellenar campos al seleccionar una correspondencia
+  codigoCorrespondenciaSelect.addEventListener('change', function () {
+    const selectedCorrespondencia = correspondencias.find(
+      (correspondencia) => correspondencia.codigo === this.value,
+    );
+
+    if (selectedCorrespondencia) {
+      fechaCorrespondenciaInput.value = selectedCorrespondencia.fecha;
+      horaCorrespondenciaInput.value = selectedCorrespondencia.hora;
+      asuntoInput.value = selectedCorrespondencia.asunto;
+      despachanteInput.value = selectedCorrespondencia.despachante || '';
+      destinatarioInput.value = selectedCorrespondencia.destinatario || '';
+    } else {
+      // Limpia los campos si no hay selección
+      fechaCorrespondenciaInput.value = '';
+      horaCorrespondenciaInput.value = '';
+      asuntoInput.value = '';
+      despachanteInput.value = '';
+      destinatarioInput.value = '';
+    }
+  });
+
+  // Mostrar modal para crear despacho
   btnCreate.addEventListener('click', () => {
     modal.style.display = 'flex';
     form.reset();
     editingIndex = null;
+  });
+
+  btnHome.addEventListener('click', () => {
+    window.location.href = '../../index.html';
   });
 
   // Cerrar modal
@@ -27,26 +86,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Guardar o editar despacho
-  form.addEventListener('submit', function (event) {
+  // Manejar el envío del formulario
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const codigo = document.getElementById('codigo').value;
-    const receptor = document.getElementById('receptor').value;
-    const despachante = document.getElementById('despachante').value;
-    const fecha = document.getElementById('fecha').value;
-    const hora = document.getElementById('hora').value;
-
-    const nuevoDespacho = { codigo, receptor, despachante, fecha, hora };
+    const despacho = {
+      codigo: codigoCorrespondenciaSelect.value,
+      fechaCorrespondencia: fechaCorrespondenciaInput.value,
+      horaCorrespondencia: horaCorrespondenciaInput.value,
+      asunto: asuntoInput.value,
+      despachante: despachanteInput.value,
+      destinatario: destinatarioInput.value,
+      depositante: depositanteInput.value,
+      receptor: receptorInput.value,
+      fechaEntrega: fechaEntregaInput.value,
+      horaEntrega: horaEntregaInput.value,
+    };
 
     if (editingIndex === null) {
-      despachos.push(nuevoDespacho);
-      agregarFila(nuevoDespacho, despachos.length - 1);
+      despachos.push(despacho);
+      agregarFila(despacho, despachos.length - 1);
       alert('Despacho registrado correctamente.');
     } else {
-      despachos[editingIndex] = nuevoDespacho;
-      actualizarFila(nuevoDespacho, editingIndex);
-      alert('Despacho modificado correctamente.');
+      despachos[editingIndex] = despacho;
+      actualizarFila(despacho, editingIndex);
+      alert('Despacho actualizado correctamente.');
     }
 
     localStorage.setItem('despachos', JSON.stringify(despachos));
@@ -55,57 +119,62 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Agregar fila a la tabla
-  function agregarFila(despacho, index) {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
+  const agregarFila = (despacho, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
             <td>${despacho.codigo}</td>
             <td>${despacho.receptor}</td>
-            <td>${despacho.despachante}</td>
-            <td>${despacho.fecha}</td>
-            <td>${despacho.hora}</td>
+            <td>${despacho.depositante}</td>
+            <td>${despacho.fechaEntrega}</td>
+            <td>${despacho.horaEntrega}</td>
             <td>
                 <button class="btn btn-modify">Modificar</button>
                 <button class="btn btn-delete">Eliminar</button>
             </td>
         `;
+    tableBody.appendChild(row);
 
-    newRow.querySelector('.btn-modify').addEventListener('click', () => {
+    row.querySelector('.btn-modify').addEventListener('click', () => {
       abrirParaEditar(despacho, index);
     });
 
-    newRow.querySelector('.btn-delete').addEventListener('click', () => {
-      if (confirm('¿Estás seguro de que deseas eliminar este despacho?')) {
+    row.querySelector('.btn-delete').addEventListener('click', () => {
+      if (confirm('¿Está seguro de eliminar este despacho?')) {
         despachos.splice(index, 1);
         localStorage.setItem('despachos', JSON.stringify(despachos));
-        newRow.remove();
+        row.remove();
       }
     });
-
-    tableBody.appendChild(newRow);
-  }
+  };
 
   // Abrir modal para editar despacho
-  function abrirParaEditar(despacho, index) {
+  const abrirParaEditar = (despacho, index) => {
     modal.style.display = 'flex';
-    document.getElementById('codigo').value = despacho.codigo;
-    document.getElementById('receptor').value = despacho.receptor;
-    document.getElementById('despachante').value = despacho.despachante;
-    document.getElementById('fecha').value = despacho.fecha;
-    document.getElementById('hora').value = despacho.hora;
+    codigoCorrespondenciaSelect.value = despacho.codigo;
+    fechaCorrespondenciaInput.value = despacho.fechaCorrespondencia;
+    horaCorrespondenciaInput.value = despacho.horaCorrespondencia;
+    asuntoInput.value = despacho.asunto;
+    despachanteInput.value = despacho.despachante;
+    destinatarioInput.value = despacho.destinatario;
+    depositanteInput.value = despacho.depositante;
+    receptorInput.value = despacho.receptor;
+    fechaEntregaInput.value = despacho.fechaEntrega;
+    horaEntregaInput.value = despacho.horaEntrega;
     editingIndex = index;
-  }
+  };
 
   // Actualizar fila en la tabla
-  function actualizarFila(despacho, index) {
+  const actualizarFila = (despacho, index) => {
     const rows = tableBody.getElementsByTagName('tr');
     const row = rows[index];
     row.cells[0].textContent = despacho.codigo;
     row.cells[1].textContent = despacho.receptor;
-    row.cells[2].textContent = despacho.despachante;
-    row.cells[3].textContent = despacho.fecha;
-    row.cells[4].textContent = despacho.hora;
-  }
+    row.cells[2].textContent = despacho.depositante;
+    row.cells[3].textContent = despacho.fechaEntrega;
+    row.cells[4].textContent = despacho.horaEntrega;
+  };
 
-  // Inicializar tabla
+  // Inicializar tabla y selector
   despachos.forEach((despacho, index) => agregarFila(despacho, index));
+  populateCorrespondenciaSelect();
 });
