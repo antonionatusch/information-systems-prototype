@@ -10,19 +10,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderTable = () => {
     employeeTable.innerHTML = '';
     employees.forEach((employee, index) => {
+      const roleName =
+        roles.find((role) => role.codigo === employee.role)?.nombre ||
+        'No asignado';
+      const unitName =
+        units.find((unit) => unit.id === employee.unit)?.nombre ||
+        'No asignada';
       const row = document.createElement('tr');
       row.innerHTML = `
-                <td>${employee.name}</td>
-                <td>${employee.carnet}</td>
-                <td>${employee.hireDate}</td>
-                <td>${employee.birthDate}</td>
-                <td>${employee.role}</td>
-                <td>${employee.unit}</td>
-                <td>
-                    <button class="btn edit" data-index="${index}">Modificar</button>
-                    <button class="btn delete" data-index="${index}">Eliminar</button>
-                </td>
-            `;
+        <td>${employee.name}</td>
+        <td>${employee.carnet}</td>
+        <td>${employee.hireDate}</td>
+        <td>${employee.birthDate}</td>
+        <td>${roleName}</td>
+        <td>${unitName}</td>
+        <td>
+          <button class="btn edit" data-index="${index}">Modificar</button>
+          <button class="btn delete" data-index="${index}">Eliminar</button>
+        </td>
+      `;
       employeeTable.appendChild(row);
     });
   };
