@@ -1,37 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recursos Humanos</title>
-    <link rel="stylesheet" href="../../css/homestyles.css"> <!-- Asegúrate de enlazar tus estilos actuales -->
-    <link rel="stylesheet" href="../../css/rrhh/recursosstyles.css"> <!-- Asegúrate de enlazar tus estilos actuales -->
-  </head>
-  <body>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/rrhh/recursosstyles.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
     <header>
-      <h1>Recursos Humanos</h1>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+            </ul>
+        </nav>
     </header>
+
+    <!-- Contenido principal -->
     <main>
-      <div class="menu-container">
-        <div class="menu-card">
-          <img src="../../img/employee.jpg" alt="Gestionar Empleado" class="menu-card-img">
-          <h3 class="menu-card-title">Gestionar Empleado</h3>
-          <a href="./gestionar-empleado.html" class="menu-card-link">Acceder</a>
-        </div>
-        <div class="menu-card">
-          <img src="../../img/job.png" alt="Gestionar Cargo" class="menu-card-img">
-          <h3 class="menu-card-title">Gestionar Cargo</h3>
-          <a href="./gestionar-cargos.html" class="menu-card-link">Acceder</a>
-        </div>
-        <div class="menu-card">
-          <img src="../../img/units.png" alt="Gestionar Unidad" class="menu-card-img">
-          <h3 class="menu-card-title">Gestionar Unidad</h3>
-          <a href="./gestionar-departamento.html" class="menu-card-link">Acceder</a>
-        </div>
-      </div>
+        <section class="menu-container">
+            <!-- Tarjeta: Gestionar Empleados -->
+            <div class="menu-card">
+                <img src="../../img/employees.png" alt="Gestionar Empleados" class="menu-image">
+                <h2>Gestionar Empleados</h2>
+                <p>Administra la información de los empleados de la organización.</p>
+                <button class="btn" onclick="window.location.href='./gestionar-empleado.html'">Ingresar</button>
+            </div>
+            <!-- Tarjeta: Gestionar Cargos -->
+            <div class="menu-card">
+                <img src="../../img/job.png" alt="Gestionar Cargos" class="menu-image">
+                <h2>Gestionar Cargos</h2>
+                <p>Gestiona y organiza los cargos disponibles en la empresa.</p>
+                <button class="btn" onclick="window.location.href='./gestionar-cargos.html'">Ingresar</button>
+            </div>
+            <!-- Tarjeta: Gestionar Departamentos -->
+            <div class="menu-card">
+                <img src="../../img/units.png" alt="Gestionar Departamentos" class="menu-image">
+                <h2>Gestionar Departamentos</h2>
+                <p>Administra y organiza los departamentos dentro de la organización.</p>
+                <button class="btn" onclick="window.location.href='./gestionar-departamento.html'">Ingresar</button>
+            </div>
+        </section>
     </main>
+
+    <!-- Pie de página -->
     <footer>
-      <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
     </footer>
-  </body>
+</body>
 </html>
