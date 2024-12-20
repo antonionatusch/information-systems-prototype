@@ -1,114 +1,118 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('contract-type-form');
-  const modal = document.getElementById('form-modal');
+  const formModal = document.getElementById('form-modal');
   const closeModal = document.querySelector('.close');
-  const btnCreate = document.getElementById('create-new');
+  const createNewButton = document.getElementById('create-new');
+  const cancelButton = document.getElementById('cancel-button');
+  const form = document.getElementById('contract-type-form');
   const tableBody = document.getElementById('contract-type-table');
 
-  let contractTypes = JSON.parse(localStorage.getItem('contractTypes')) || [];
+  let contractTypes = JSON.parse(localStorage.getItem('contractTypes')) || [
+    {
+      codigo: 'CON-001',
+      nombre: 'Contrato de Auditoría Financiera',
+      descripcion:
+        'Realización de auditorías financieras según normativas internacionales.',
+    },
+    {
+      codigo: 'CON-002',
+      nombre: 'Contrato de Consultoría',
+      descripcion: 'Servicios de consultoría para optimización financiera.',
+    },
+    {
+      codigo: 'CON-003',
+      nombre: 'Contrato de Outsourcing',
+      descripcion: 'Gestión externa de procesos administrativos y contables.',
+    },
+  ];
+
   let editingIndex = null;
 
-  // Mostrar modal para crear un nuevo tipo
-  btnCreate.addEventListener('click', () => {
-    modal.style.display = 'flex';
+  // Función para mostrar la lista en la tabla
+  function renderTable() {
+    tableBody.innerHTML = '';
+    contractTypes.forEach((type, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${type.codigo}</td>
+        <td>${type.nombre}</td>
+        <td>${type.descripcion}</td>
+        <td>
+          <button class="btn btn-edit" data-index="${index}">Editar</button>
+          <button class="btn btn-delete" data-index="${index}">Eliminar</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    // Botones de editar
+    document.querySelectorAll('.btn-edit').forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        openModal(contractTypes[index], index);
+      }),
+    );
+
+    // Botones de eliminar
+    document.querySelectorAll('.btn-delete').forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        if (confirm('¿Estás seguro de eliminar este tipo de contrato?')) {
+          contractTypes.splice(index, 1);
+          localStorage.setItem('contractTypes', JSON.stringify(contractTypes));
+          renderTable();
+        }
+      }),
+    );
+  }
+
+  // Función para abrir el modal
+  function openModal(type = {}, index = null) {
+    editingIndex = index;
+    form.codigo.value = type.codigo || '';
+    form.nombre.value = type.nombre || '';
+    form.descripcion.value = type.descripcion || '';
+    formModal.style.display = 'block';
+  }
+
+  // Función para cerrar el modal
+  function closeModalHandler() {
+    formModal.style.display = 'none';
     form.reset();
     editingIndex = null;
-  });
+  }
 
-  // Cerrar modal
-  closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  // Guardar o actualizar tipo de contrato
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  // Cerrar modal al hacer clic fuera del contenido
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
+    const codigo = form.codigo.value.trim();
+    const nombre = form.nombre.value.trim();
+    const descripcion = form.descripcion.value.trim();
 
-  // Guardar o editar un tipo de contrato
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const codigo = document.getElementById('codigo').value;
-    const nombre = document.getElementById('nombre').value;
-    const descripcion = document.getElementById('descripcion').value;
-
-    const nuevoTipocontrato = { codigo, nombre, descripcion };
-
-    if (editingIndex === null) {
-      // Verificar duplicados
-      const existe = contractTypes.some(
-        (contract) => contract.codigo === codigo,
-      );
-      if (existe) {
-        alert('El código del tipo de contrato ya existe. Intente con otro.');
+    if (editingIndex !== null) {
+      // Actualizar
+      contractTypes[editingIndex] = { codigo, nombre, descripcion };
+      alert('Tipo de contrato actualizado correctamente.');
+    } else {
+      // Crear nuevo
+      if (contractTypes.some((type) => type.codigo === codigo)) {
+        alert('El código ya existe. Usa un código único.');
         return;
       }
-
-      contractTypes.push(nuevoTipocontrato);
-      agregarFila(nuevoTipocontrato, contractTypes.length - 1);
+      contractTypes.push({ codigo, nombre, descripcion });
       alert('Tipo de contrato creado correctamente.');
-    } else {
-      contractTypes[editingIndex] = nuevoTipocontrato;
-      actualizarFila(nuevoTipocontrato, editingIndex);
-      alert('Tipo de contrato modificado correctamente.');
     }
 
     localStorage.setItem('contractTypes', JSON.stringify(contractTypes));
-    form.reset();
-    modal.style.display = 'none';
+    closeModalHandler();
+    renderTable();
   });
 
-  // Agregar fila a la tabla
-  function agregarFila(tipo, index) {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-      <td>${tipo.codigo}</td>
-      <td>${tipo.nombre}</td>
-      <td>${tipo.descripcion}</td>
-      <td>
-        <button class="btn btn-modify">Modificar</button>
-        <button class="btn btn-delete">Eliminar</button>
-      </td>
-    `;
+  // Eventos para botones
+  createNewButton.addEventListener('click', () => openModal());
+  closeModal.addEventListener('click', closeModalHandler);
+  cancelButton.addEventListener('click', closeModalHandler);
 
-    newRow.querySelector('.btn-modify').addEventListener('click', () => {
-      abrirParaEditar(tipo, index);
-    });
-
-    newRow.querySelector('.btn-delete').addEventListener('click', () => {
-      if (
-        confirm('¿Estás seguro de que deseas eliminar este tipo de contrato?')
-      ) {
-        contractTypes.splice(index, 1);
-        localStorage.setItem('contractTypes', JSON.stringify(contractTypes));
-        newRow.remove();
-      }
-    });
-
-    tableBody.appendChild(newRow);
-  }
-
-  // Abrir modal para editar un tipo de contrato
-  function abrirParaEditar(tipo, index) {
-    modal.style.display = 'flex';
-    document.getElementById('codigo').value = tipo.codigo;
-    document.getElementById('nombre').value = tipo.nombre;
-    document.getElementById('descripcion').value = tipo.descripcion;
-    editingIndex = index;
-  }
-
-  // Actualizar fila en la tabla
-  function actualizarFila(tipo, index) {
-    const rows = tableBody.getElementsByTagName('tr');
-    const row = rows[index];
-    row.cells[0].textContent = tipo.codigo;
-    row.cells[1].textContent = tipo.nombre;
-    row.cells[2].textContent = tipo.descripcion;
-  }
-
-  // Inicializar tabla
-  contractTypes.forEach((tipo, index) => agregarFila(tipo, index));
+  // Inicializar la tabla
+  renderTable();
 });

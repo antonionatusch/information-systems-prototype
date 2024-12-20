@@ -5,7 +5,43 @@ document.addEventListener('DOMContentLoaded', function () {
   const btnCreate = document.getElementById('create-new');
   const tableBody = document.getElementById('proposal-type-table');
 
+  // Datos iniciales
+  const initialProposalTypes = [
+    {
+      codigo: 'AUD-001',
+      nombre: 'Auditoría Externa Financiera',
+      descripcion:
+        'Propuesta de auditoría externa financiera para la gestión 2023',
+    },
+    {
+      codigo: 'OUT-002',
+      nombre: 'Outsourcing',
+      descripcion: 'Propuesta de outsourcing para soporte administrativo',
+    },
+    {
+      codigo: 'REG-003',
+      nombre: 'Registros Contables',
+      descripcion:
+        'Propuesta para registros contables y asesoramiento contable',
+    },
+    {
+      codigo: 'ASE-004',
+      nombre: 'Asesoría',
+      descripcion: 'Propuesta de asesoría técnica para el cierre de gestión',
+    },
+    {
+      codigo: 'CON-005',
+      nombre: 'Consultoría',
+      descripcion: 'Propuesta de consultoría contable y tributaria',
+    },
+  ];
+
+  // Inicializar Local Storage si está vacío
   let proposalTypes = JSON.parse(localStorage.getItem('proposalTypes')) || [];
+  if (proposalTypes.length === 0) {
+    proposalTypes = initialProposalTypes;
+    localStorage.setItem('proposalTypes', JSON.stringify(proposalTypes));
+  }
   let editingIndex = null;
 
   // Mostrar modal para crear un nuevo tipo
