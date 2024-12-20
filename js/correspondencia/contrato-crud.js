@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Obtener datos del Local Storage
   let contratos = JSON.parse(localStorage.getItem('contratos')) || [];
-  let propuestas = JSON.parse(localStorage.getItem('proposals')) || [];
+  let propuestas = JSON.parse(localStorage.getItem('propuestas')) || [];
   let tiposContrato = JSON.parse(localStorage.getItem('contractTypes')) || [];
   let tiposPropuesta = JSON.parse(localStorage.getItem('proposalTypes')) || [];
   let editingIndex = null;
