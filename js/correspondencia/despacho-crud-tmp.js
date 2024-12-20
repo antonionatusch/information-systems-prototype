@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById('form-modal');
   const closeModal = document.querySelector('.close');
   const btnCreate = document.getElementById('create-new');
+  const btnHome = document.getElementById('back-to-home');
   const tableBody = document.getElementById('despacho-table');
   const codigoCorrespondenciaSelect = document.getElementById(
     'codigo-correspondencia',
@@ -67,6 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.style.display = 'flex';
     form.reset();
     editingIndex = null;
+  });
+
+  btnHome.addEventListener('click', () => {
+    window.location.href = '../../index.html';
   });
 
   // Cerrar modal

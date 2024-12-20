@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModal = document.querySelector('.close');
   const btnCreate = document.getElementById('create-new');
   const tableBody = document.getElementById('despachada-table');
-
+  const btnHome = document.getElementById('back-to-home');
   let correspondencias =
     JSON.parse(localStorage.getItem('correspondenciasDespachadas')) || [];
   let editingIndex = null;
@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.display = 'flex';
     form.reset();
     editingIndex = null;
+  });
+
+  btnHome.addEventListener('click', () => {
+    window.location.href = '../../index.html';
   });
 
   // Cerrar modal
