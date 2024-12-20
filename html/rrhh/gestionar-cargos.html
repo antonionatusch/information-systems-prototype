@@ -1,76 +1,72 @@
-<DOCTYPE html>
-  <html lang="es">
-
-  <head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Cargos</title>
+    <title>Gestionar Vacaciones</title>
     <link rel="stylesheet" href="../../css/homestyles.css">
-    <link rel="stylesheet" href="../../css/crudstyles.css">
-  </head>
-
-  <body>
+    <link rel="stylesheet" href="../../css/permisos-vacaciones/crudtipovacacionstyles.css">
+</head>
+<body>
     <header>
-      <nav class="navbar">
-        <div class="logo-container">
-          <h1>ASIMCO S.R.L.</h1>
-          <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
-        </div>
-        <ul class="nav-links">
-          <li><a href="../../index.html">Inicio</a></li>
-          <li><a href="../rrhh/recursos-humanos.html">Recursos Humanos</a></li>
-          <li><a href="correspondencia.html">Correspondencia</a></li>
-
-          <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
-          <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
-        </ul>
-
-      </nav>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="gestionar-empleado.html">Empleados</a></li>
+                <li><a href="gestionar-departamento.html">Departamentos</a></li>
+            </ul>
+        </nav>
     </header>
-
     <main>
-      <div class="crud-container">
-        <div class="action-buttons">
-          <button id="create-new" class="btn">Crear Cargo</button>
-          <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al
-            Inicio</button>
+        <section class="table-container">
+            <h2>Cargos</h2>
+            <button id="btn-create" class="button btn-create">Registrar Cargos</button>
+            <table id="table-requests" class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cargo</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--  -->
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="form-modal" class="form-modal">
+            <div class="modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <h2>Registrar Cargo</h2>
+                <form id="form-position">
+                    <label for="id">Código:</label>
+                    <input type="text" id="id" name="id" required>
+
+                    <label for="name">Cargo:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="description">Descripción:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="btn-send">Registrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Cargo</th>
-              <th>Descripción</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="cargo-table"></tbody>
-        </table>
-
-        <div id="form-modal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Crear/Modificar Cargo</h3>
-            <form id="cargo-form">
-              <label for="codigo">Código del Cargo:</label>
-              <input type="text" id="codigo" name="codigo" required>
-
-              <label for="nombre">Cargo:</label>
-              <input type="text" id="nombre" name="nombre" required>
-
-              <label for="descripcion">Descripción:</label>
-              <textarea id="descripcion" name="descripcion" required></textarea>
-
-              <button type="submit" class="btn">Guardar</button>
-              <button type="button" id="cancel-button" class="btn">Cancelar</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </main>
-
-    <script src="../../js/organizacion/cargos-crud.js"></script>
-  </body>
-
-  </html>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../../js/rrhh/cargo-crud.js"></script>
+</body>
+</html>
