@@ -5,9 +5,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCreate = document.getElementById('create-new');
   const tableBody = document.getElementById('despachada-table');
   const btnHome = document.getElementById('back-to-home');
+  const selectAsunto = document.getElementById('asunto');
+  const selectDespachante = document.getElementById('despachante');
+  const selectDestinatario = document.getElementById('destinatario');
+
   let correspondencias =
     JSON.parse(localStorage.getItem('correspondenciasDespachadas')) || [];
+  let asuntos = JSON.parse(localStorage.getItem('asuntos')) || [];
+  let empleados = JSON.parse(localStorage.getItem('empleados')) || [];
+  let responsables = JSON.parse(localStorage.getItem('responsables')) || [];
   let editingIndex = null;
+
+  // Cargar selectores
+  function cargarSelectores() {
+    // Cargar asuntos
+    selectAsunto.innerHTML = asuntos
+      .map(
+        (asunto) =>
+          `<option value="${asunto.codigo}">${asunto.titulo}</option>`,
+      )
+      .join('');
+
+    // Cargar despachantes
+    selectDespachante.innerHTML = empleados
+      .map(
+        (empleado) =>
+          `<option value="${empleado.nombre}">${empleado.nombre}</option>`,
+      )
+      .join('');
+
+    // Cargar destinatarios
+    selectDestinatario.innerHTML = responsables
+      .map(
+        (responsable) =>
+          `<option value="${responsable.nombre}">${responsable.nombre}</option>`,
+      )
+      .join('');
+  }
+
+  cargarSelectores();
 
   // Mostrar modal para crear correspondencia
   btnCreate.addEventListener('click', () => {
