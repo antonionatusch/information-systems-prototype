@@ -1,0 +1,43 @@
+.menu-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Hace que la imagen sea circular */
+    object-fit: cover; /* Asegura que la imagen se ajuste dentro del círculo */
+    margin-bottom: 10px; /* Espaciado entre la imagen y el texto */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: white; /* Fondo para evitar bordes transparentes */
+    padding: 5px; /* Espaciado interno */
+}
+
+.menu-card {
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px); /* Efecto de hover para levantar el card */
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+}
+
+.menu-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+.menu-card a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.menu-card a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}

@@ -1,74 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Propuestas</title>
-    <link rel="stylesheet" href="../../css/homestyles.css">
-    <link rel="stylesheet" href="../../css/crudstyles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionar Propuestas</title>
+  <link rel="stylesheet" href="../../css/homestyles.css">
+  <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <h1>Gestionar Propuestas</h1>
-        </nav>
-    </header>
-    <main>
-        <div class="crud-container">
-            <div class="action-buttons">
-                <button id="create-new" class="btn">Crear Propuesta</button>
-                <button id="back-to-home" class="btn">Volver al Inicio</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Tipo</th>
-                        <th>Contrato</th>
-                        <th>Destinatario</th>
-                        <th>Responsable</th>
-                        <th>Monto</th>
-                        <th>Fechas</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="propuestas-table"></tbody>
-            </table>
-        </div>
-        <div id="form-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Crear/Modificar Propuesta</h3>
-                <form id="propuesta-form">
-                    <label for="codigo">Código:</label>
-                    <input type="text" id="codigo" name="codigo" required>
+  <header>
 
-                    <label for="tipo">Tipo de Propuesta:</label>
-                    <select id="tipo" name="tipo" required></select>
+    <nav class="navbar">
+      <h1>Gestionar Propuestas</h1>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Inicio</a></li>
+        <li><a href="propuestas.html">Propuestas</a></li>
 
-                    <!-- <label for="contrato">Contrato:</label> -->
-                    <!-- <select id="contrato" name="contrato" required></select> -->
+        <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
+        <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
+      </ul>
+    </nav>
 
-                    <label for="destinatario">Destinatario:</label>
-                    <input type="text" id="destinatario" name="destinatario" required>
+  </header>
+  <main>
+    <div class="crud-container">
+      <div class="action-buttons">
+        <button id="create-new" class="btn">Crear Propuesta</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Tipo</th>
+            <th>Destinatario</th>
+            <th>Responsable</th>
+            <th>Monto</th>
+            <th>Contrato</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="proposal-table"></tbody>
+      </table>
+    </div>
+    <div id="form-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Crear/Modificar Propuesta</h3>
+        <form id="proposal-form">
+          <label for="codigo">Código:</label>
+          <input type="text" id="codigo" name="codigo" required>
 
-                    <label for="responsable">Responsable:</label>
-                    <input type="text" id="responsable" name="responsable" required>
+          <label for="tipo">Tipo de Propuesta:</label>
+          <select id="tipo" name="tipo" required></select>
 
-                    <label for="monto">Monto:</label>
-                    <input type="number" id="monto" name="monto" required>
+          <label for="destinatario">Destinatario:</label>
+          <input type="text" id="destinatario" name="destinatario" required>
 
-                    <label for="fecha-inicio">Fecha de Inicio:</label>
-                    <input type="date" id="fecha-inicio" name="fecha-inicio" required>
+          <label for="responsable">Responsable:</label>
+          <input type="text" id="responsable" name="responsable" required>
 
-                    <label for="fecha-termino">Fecha de Término:</label>
-                    <input type="date" id="fecha-termino" name="fecha-termino" required>
+          <label for="contract-selector">Contrato:</label>
+          <select id="contract-selector" name="contract"></select>
 
-                    <button type="submit" class="btn">Guardar</button>
-                </form>
-            </div>
-        </div>
-    </main>
-    <script src="../../js/correspondencia/gestionar-propuestas.js"></script>
+          <label for="monto">Monto:</label>
+          <input type="number" id="monto" name="monto" readonly>
+
+          <button type="submit" class="btn">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="../../js/correspondencia/gestionar-propuestas.js"></script>
 </body>
+
 </html>

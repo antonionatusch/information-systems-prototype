@@ -1,149 +1,133 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('propuesta-form');
-  const modal = document.getElementById('form-modal');
-  const closeModal = document.querySelector('.close');
-  const btnCreate = document.getElementById('create-new');
-  const tableBody = document.getElementById('propuestas-table');
-  const tipoSelect = document.getElementById('tipo');
-  const contratoSelect = document.getElementById('contrato');
+  const proposalTable = document.getElementById('proposal-table');
+  const formModal = document.getElementById('form-modal');
+  const closeModalButton = document.querySelector('.close');
+  const proposalForm = document.getElementById('proposal-form');
+  const contractSelector = document.getElementById('contract-selector');
+  const typeSelector = document.getElementById('tipo');
+  const amountField = document.getElementById('monto');
+  const createNewButton = document.getElementById('create-new');
 
-  let propuestas = JSON.parse(localStorage.getItem('propuestas')) || [];
-  let tipos = JSON.parse(localStorage.getItem('tiposPropuesta')) || [];
-  let contratos = JSON.parse(localStorage.getItem('tiposContrato')) || [];
+  let proposals = JSON.parse(localStorage.getItem('propuestas')) || [];
+  let proposalTypes = JSON.parse(localStorage.getItem('proposalTypes')) || [];
+  let contracts = JSON.parse(localStorage.getItem('contratos')) || [];
   let editingIndex = null;
 
-  // Renderizar opciones en los selectores
-  tipos.forEach((tipo) => {
-    const option = document.createElement('option');
-    option.value = tipo.codigo;
-    option.textContent = tipo.nombre;
-    tipoSelect.appendChild(option);
+  // Cargar tipos de propuesta
+  function loadProposalTypes() {
+    typeSelector.innerHTML = '<option value="">Seleccione un tipo</option>';
+    proposalTypes.forEach((type) => {
+      const option = document.createElement('option');
+      option.value = type.codigo;
+      option.textContent = type.nombre;
+      typeSelector.appendChild(option);
+    });
+  }
+
+  // Cargar contratos
+  function loadContracts() {
+    contractSelector.innerHTML = '<option value="">Sin contrato</option>';
+    contracts.forEach((contract) => {
+      const option = document.createElement('option');
+      option.value = contract.codigo;
+      option.textContent = `${contract.codigo}`;
+      contractSelector.appendChild(option);
+    });
+  }
+
+  // Actualizar monto al seleccionar contrato
+  contractSelector.addEventListener('change', function () {
+    const selectedContract = contracts.find(
+      (contract) => contract.codigo === this.value,
+    );
+    amountField.value = selectedContract ? selectedContract.monto : '';
   });
 
-  contratos.forEach((contrato) => {
-    const option = document.createElement('option');
-    option.value = contrato.codigo;
-    option.textContent = contrato.nombre;
-    contratoSelect.appendChild(option);
-  });
+  // Renderizar propuestas
+  function renderProposals() {
+    proposalTable.innerHTML = '';
+    proposals.forEach((proposal, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${proposal.codigo}</td>
+        <td>${proposal.tipo}</td>
+        <td>${proposal.destinatario}</td>
+        <td>${proposal.responsable}</td>
+        <td>${proposal.monto}</td>
+        <td>${proposal.contrato || 'Sin contrato'}</td>
+        <td>
+          <button onclick="editProposal(${index})">Modificar</button>
+          <button onclick="deleteProposal(${index})">Eliminar</button>
+        </td>
+      `;
+      proposalTable.appendChild(row);
+    });
+  }
 
-  // Mostrar modal para crear propuesta
-  btnCreate.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    form.reset();
+  // Mostrar modal para crear nueva propuesta
+  createNewButton.addEventListener('click', function () {
+    formModal.style.display = 'flex';
+    proposalForm.reset();
+    contractSelector.value = '';
+    amountField.value = '';
     editingIndex = null;
   });
 
-  // Cerrar modal
-  closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  // Guardar propuesta
+  proposalForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  // Cerrar modal al hacer clic fuera del contenido
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-
-  // Guardar o editar propuesta
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const codigo = document.getElementById('codigo').value;
-    const tipo = tipoSelect.value;
-    const contrato = contratoSelect.value;
-    const destinatario = document.getElementById('destinatario').value;
-    const responsable = document.getElementById('responsable').value;
-    const monto = parseFloat(document.getElementById('monto').value);
-    const fechaInicio = document.getElementById('fecha-inicio').value;
-    const fechaTermino = document.getElementById('fecha-termino').value;
-
-    const nuevaPropuesta = {
-      codigo,
-      tipo,
-      contrato,
-      destinatario,
-      responsable,
-      monto,
-      fechaInicio,
-      fechaTermino,
+    const newProposal = {
+      codigo: document.getElementById('codigo').value,
+      tipo: typeSelector.value,
+      destinatario: document.getElementById('destinatario').value,
+      responsable: document.getElementById('responsable').value,
+      monto: amountField.value,
+      contrato: contractSelector.value || 'Sin contrato',
     };
 
     if (editingIndex === null) {
-      propuestas.push(nuevaPropuesta);
-      agregarFila(nuevaPropuesta, propuestas.length - 1);
-      alert('Propuesta creada correctamente.');
+      proposals.push(newProposal);
     } else {
-      propuestas[editingIndex] = nuevaPropuesta;
-      actualizarFila(nuevaPropuesta, editingIndex);
-      alert('Propuesta actualizada correctamente.');
+      proposals[editingIndex] = newProposal;
+      editingIndex = null;
     }
 
-    localStorage.setItem('propuestas', JSON.stringify(propuestas));
-    form.reset();
-    modal.style.display = 'none';
+    localStorage.setItem('propuestas', JSON.stringify(proposals));
+    renderProposals();
+    formModal.style.display = 'none';
+    proposalForm.reset();
   });
 
-  // Agregar fila a la tabla
-  function agregarFila(propuesta, index) {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-            <td>${propuesta.codigo}</td>
-            <td>${propuesta.tipo}</td>
-            <td>${propuesta.contrato}</td>
-            <td>${propuesta.destinatario}</td>
-            <td>${propuesta.responsable}</td>
-            <td>${propuesta.monto}</td>
-            <td>${propuesta.fechaInicio} - ${propuesta.fechaTermino}</td>
-            <td>
-                <button class="btn btn-modify">Modificar</button>
-                <button class="btn btn-delete">Eliminar</button>
-            </td>
-        `;
+  // Editar propuesta
+  window.editProposal = function (index) {
+    const proposal = proposals[index];
+    document.getElementById('codigo').value = proposal.codigo;
+    typeSelector.value = proposal.tipo;
+    document.getElementById('destinatario').value = proposal.destinatario;
+    document.getElementById('responsable').value = proposal.responsable;
+    contractSelector.value = proposal.contrato;
+    amountField.value = proposal.monto;
 
-    newRow.querySelector('.btn-modify').addEventListener('click', () => {
-      abrirParaEditar(propuesta, index);
-    });
-
-    newRow.querySelector('.btn-delete').addEventListener('click', () => {
-      if (confirm('¿Estás seguro de eliminar esta propuesta?')) {
-        propuestas.splice(index, 1);
-        localStorage.setItem('propuestas', JSON.stringify(propuestas));
-        newRow.remove();
-      }
-    });
-
-    tableBody.appendChild(newRow);
-  }
-
-  // Abrir modal para editar propuesta
-  function abrirParaEditar(propuesta, index) {
-    modal.style.display = 'flex';
-    document.getElementById('codigo').value = propuesta.codigo;
-    tipoSelect.value = propuesta.tipo;
-    contratoSelect.value = propuesta.contrato;
-    document.getElementById('destinatario').value = propuesta.destinatario;
-    document.getElementById('responsable').value = propuesta.responsable;
-    document.getElementById('monto').value = propuesta.monto;
-    document.getElementById('fecha-inicio').value = propuesta.fechaInicio;
-    document.getElementById('fecha-termino').value = propuesta.fechaTermino;
     editingIndex = index;
-  }
+    formModal.style.display = 'flex';
+  };
 
-  // Actualizar fila en la tabla
-  function actualizarFila(propuesta, index) {
-    const rows = tableBody.getElementsByTagName('tr');
-    const row = rows[index];
-    row.cells[0].textContent = propuesta.codigo;
-    row.cells[1].textContent = propuesta.tipo;
-    row.cells[2].textContent = propuesta.contrato;
-    row.cells[3].textContent = propuesta.destinatario;
-    row.cells[4].textContent = propuesta.responsable;
-    row.cells[5].textContent = propuesta.monto;
-    row.cells[6].textContent = `${propuesta.fechaInicio} - ${propuesta.fechaTermino}`;
-  }
+  // Eliminar propuesta
+  window.deleteProposal = function (index) {
+    if (confirm('¿Está seguro de eliminar esta propuesta?')) {
+      proposals.splice(index, 1);
+      localStorage.setItem('propuestas', JSON.stringify(proposals));
+      renderProposals();
+    }
+  };
 
-  // Inicializar tabla
-  propuestas.forEach((propuesta, index) => agregarFila(propuesta, index));
+  // Inicializar
+  closeModalButton.addEventListener(
+    'click',
+    () => (formModal.style.display = 'none'),
+  );
+  loadProposalTypes();
+  loadContracts();
+  renderProposals();
 });

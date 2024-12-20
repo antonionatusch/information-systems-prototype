@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Contratos</title>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/correspondenciastyles.css">
+    <link rel="stylesheet" href="../../css/crudstyles.css">
+    <style>
+        /* Ocultar modal inicialmente */
+        #contrato-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #contrato-modal .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 40%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: red;
+        }
+
+        #contratos-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+
+
+        .btn {
+            padding: 8px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-create {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-create:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-save {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+    <nav class="navbar">
+      <h1>Gestionar Contrato</h1>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Inicio</a></li>
+        <li><a href="propuestas.html">Propuestas</a></li>
+
+        <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
+        <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
+      </ul>
+    </nav>
+
+    </header>
+    <main>
+        <h2>Contratos</h2>
+        <button id="create-contrato" class="btn btn-create">Crear Contrato</button>
+        <table id="contratos-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Propuesta</th>
+                    <th>Destinatario</th>
+                    <th>Responsable</th>
+                    <th>Tipo Contrato</th>
+                    <th>Tipo Propuesta</th>
+                    <th>Monto</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se llenarán dinámicamente -->
+            </tbody>
+        </table>
+    </main>
+    <div id="contrato-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Crear/Modificar Contrato</h3>
+            <form id="contrato-form">
+                <label for="codigo">Código del Contrato:</label>
+                <input type="text" id="codigo" required>
+
+                <label for="codigo-propuesta">Código de la Propuesta:</label>
+                <select id="codigo-propuesta" required>
+                    <option value="">Seleccione una propuesta</option>
+                </select>
+
+                <label for="destinatario">Destinatario:</label>
+                <input type="text" id="destinatario" required>
+
+                <label for="responsable">Responsable:</label>
+                <input type="text" id="responsable" required>
+
+                <label for="tipo-contrato">Tipo de Contrato:</label>
+                <select id="tipo-contrato" required>
+                    <option value="">Seleccione un tipo de contrato</option>
+                </select>
+
+                <label for="tipo-propuesta">Tipo de Propuesta:</label>
+                <select id="tipo-propuesta" required>
+                    <option value="">Seleccione un tipo de propuesta</option>
+                </select>
+
+                <label for="monto">Monto:</label>
+                <input type="number" id="monto" step="0.01" required>
+
+                <label for="fecha-inicio">Fecha Inicio:</label>
+                <input type="date" id="fecha-inicio" required>
+
+                <label for="fecha-termino">Fecha Fin:</label>
+                <input type="date" id="fecha-termino" required>
+
+                <label for="fecha-contrato">Fecha de Contrato:</label>
+                <input type="date" id="fecha-contrato" required>
+
+                <button type="submit" class="btn btn-save">Guardar</button>
+                <button type="button" class="btn btn-cancel">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <script src="../../js/correspondencia/contrato-crud.js"></script>
+</body>
+</html>
