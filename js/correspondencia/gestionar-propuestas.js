@@ -3,10 +3,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById('form-modal');
   const closeModal = document.querySelector('.close');
   const btnCreate = document.getElementById('create-new');
+  const btnHome = document.getElementById('back-to-home');
   const tableBody = document.getElementById('propuestas-table');
   const tipoSelect = document.getElementById('tipo');
   const contratoSelect = document.getElementById('contrato');
 
+  // Obtener proposalTypes del localStorage
+  const proposalTypes = JSON.parse(localStorage.getItem('proposalTypes')) || [];
+
+  // Renderizar opciones en el selector de tipo de propuesta
+  proposalTypes.forEach((proposalType) => {
+    const option = document.createElement('option');
+    option.value = proposalType.codigo;
+    option.textContent = proposalType.nombre;
+    tipoSelect.appendChild(option);
+  });
   let propuestas = JSON.parse(localStorage.getItem('propuestas')) || [];
   let tipos = JSON.parse(localStorage.getItem('tiposPropuesta')) || [];
   let contratos = JSON.parse(localStorage.getItem('tiposContrato')) || [];
@@ -32,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.style.display = 'flex';
     form.reset();
     editingIndex = null;
+  });
+  btnHome.addEventListener('click', () => {
+    window.location.href = '../../index.html';
   });
 
   // Cerrar modal
