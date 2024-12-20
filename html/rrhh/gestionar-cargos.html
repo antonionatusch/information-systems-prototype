@@ -1,68 +1,76 @@
 <DOCTYPE html>
-<html lang="es">
+  <html lang="es">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestionar Cargos</title>
-  <link rel="stylesheet" href="../../css/homestyles.css">
-  <link rel="stylesheet" href="../../css/crudstyles.css">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Cargos</title>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/crudstyles.css">
+  </head>
 
-<body>
-  <header>
-    <nav class="navbar">
-      <div class="logo-container">
-        <h1>Gestionar Cargos</h1>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../../index.html">Inicio</a></li>
-      </ul>
-    </nav>
-  </header>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo-container">
+          <h1>ASIMCO S.R.L.</h1>
+          <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+        </div>
+        <ul class="nav-links">
+          <li><a href="../../index.html">Inicio</a></li>
+          <li><a href="../rrhh/recursos-humanos.html">Recursos Humanos</a></li>
+          <li><a href="correspondencia.html">Correspondencia</a></li>
 
-  <main>
-    <div class="crud-container">
-      <div class="action-buttons">
-        <button id="create-new" class="btn">Crear Cargo</button>
-        <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al Inicio</button>
-      </div>
+          <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
+          <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
+        </ul>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Cargo</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="cargo-table"></tbody>
-      </table>
+      </nav>
+    </header>
 
-      <div id="form-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h3>Crear/Modificar Cargo</h3>
-          <form id="cargo-form">
-            <label for="codigo">Código del Cargo:</label>
-            <input type="text" id="codigo" name="codigo" required>
+    <main>
+      <div class="crud-container">
+        <div class="action-buttons">
+          <button id="create-new" class="btn">Crear Cargo</button>
+          <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al
+            Inicio</button>
+        </div>
 
-            <label for="nombre">Cargo:</label>
-            <input type="text" id="nombre" name="nombre" required>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Cargo</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="cargo-table"></tbody>
+        </table>
 
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" required></textarea>
+        <div id="form-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Crear/Modificar Cargo</h3>
+            <form id="cargo-form">
+              <label for="codigo">Código del Cargo:</label>
+              <input type="text" id="codigo" name="codigo" required>
 
-            <button type="submit" class="btn">Guardar</button>
-            <button type="button" id="cancel-button" class="btn">Cancelar</button>
-          </form>
+              <label for="nombre">Cargo:</label>
+              <input type="text" id="nombre" name="nombre" required>
+
+              <label for="descripcion">Descripción:</label>
+              <textarea id="descripcion" name="descripcion" required></textarea>
+
+              <button type="submit" class="btn">Guardar</button>
+              <button type="button" id="cancel-button" class="btn">Cancelar</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <script src="../../js/organizacion/cargos-crud.js"></script>
-</body>
+    <script src="../../js/organizacion/cargos-crud.js"></script>
+  </body>
 
-</html>
+  </html>
