@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionar Tipo de Contrato</title>
+  <link rel="stylesheet" href="../../css/homestyles.css">
+  <link rel="stylesheet" href="../../css/crudstyles.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <h1>Gestionar Tipos de Contrato</h1>
+    </nav>
+  </header>
+  <main>
+    <div class="crud-container">
+      <div class="action-buttons">
+        <button id="create-new" class="btn">Crear Tipo de Contrato</button>
+        <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html'">Volver al Inicio</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Tipo de contrato</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="proposal-type-table"></tbody>
+      </table>
+    </div>
+    <div id="form-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Crear/Modificar Tipo de Contrato</h3>
+        <form id="proposal-type-form">
+          <label for="codigo">Código:</label>
+          <input type="text" id="codigo" name="codigo" required>
+
+          <label for="nombre">Tipo de contrato:</label>
+          <input type="text" id="nombre" name="nombre" required>
+
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" name="descripcion" required></textarea>
+
+          <button type="submit" class="btn">Guardar</button>
+          <button type="button" id="cancel-button" class="btn">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="../../js/correspondencia/tipo-contrato-crud.js"></script>
+</body>
+
+</html>

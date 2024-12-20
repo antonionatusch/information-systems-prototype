@@ -49,3 +49,4 @@ debug.log
 # Git
 *.patch
 *.diff
+.cz.toml

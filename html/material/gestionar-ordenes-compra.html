@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Órdenes de Compra</title>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/crudstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>Gestionar Órdenes de Compra</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="crud-container">
+            <div class="action-buttons">
+                <button id="create-new" class="btn">Crear Orden de Compra</button>
+                <button id="back-to-home" class="btn" onclick="window.location.href='../index.html';">Volver al Inicio</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código de Solicitud</th>
+                        <th>Código de Orden</th>
+                        <th>Fecha de Generación</th>
+                        <th>Empleado Solicitante</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="ordenes-table"></tbody>
+            </table>
+        </div>
+        <div id="form-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Crear/Modificar Orden de Compra</h3>
+                <form id="orden-form">
+                    <label for="codigo-solicitud">Código de Solicitud:</label>
+                    <select id="codigo-solicitud" name="codigo-solicitud" required>
+                        <option value="">Seleccione una solicitud</option>
+                    </select>
+
+                    <label for="codigo-orden">Código de Orden de Compra:</label>
+                    <input type="text" id="codigo-orden" name="codigo-orden" required>
+
+                    <label for="fecha-generacion">Fecha de Generación:</label>
+                    <input type="date" id="fecha-generacion" name="fecha-generacion" required>
+
+                    <label for="empleado-solicitante">Empleado Solicitante:</label>
+                    <input type="text" id="empleado-solicitante" name="empleado-solicitante" readonly>
+
+                    <button type="submit">Guardar</button>
+                    <button type="button" id="cancel-button">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="../../js/material/ordenes-compra-crud.js"></script>
+</body>
+</html>

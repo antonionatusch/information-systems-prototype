@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const gestionarEmpleadoLink = document.getElementById(
     'gestionar-empleado-link',
   );
-  const gestionarDepartamentoLink = document.getElementById(
-    'gestionar-departamento-link',
-  );
   const empresasLink = document.getElementById('empresas-link');
+  const propuestasLink = document.getElementById('gestionar-propuestas-link');
 
   if (currentUser) {
     // Mostrar enlaces para usuarios autenticados
@@ -18,19 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mostrar enlaces de gestión solo para Gerente Administrativo
     if (currentUser.role === 'Gerente Administrativo') {
       gestionarEmpleadoLink.style.display = 'block';
-      gestionarDepartamentoLink.style.display = 'block';
       empresasLink.style.display = 'block';
+      propuestasLink.style.display = 'block';
     } else {
       gestionarEmpleadoLink.style.display = 'none';
-      gestionarDepartamentoLink.style.display = 'none';
       empresasLink.style.display = 'none';
+      propuestasLink.style.display = 'none';
     }
   } else {
     // Ocultar enlaces si no hay usuario autenticado
     logoutLink.style.display = 'none';
     gestionarEmpleadoLink.style.display = 'none';
-    gestionarDepartamentoLink.style.display = 'none';
     empresasLink.style.display = 'none';
+    propuestasLink.style.display = 'none';
     loginLink.style.display = 'block';
   }
 
