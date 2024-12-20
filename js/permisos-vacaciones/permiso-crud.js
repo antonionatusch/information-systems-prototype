@@ -4,10 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.getElementById('close-modal');
     const tableBody = document.querySelector('#table-requests tbody');
     const btnCreate = document.getElementById('btn-create');
+    const reasonSelect = document.querySelector('select[name="reason"]');
+    const unitSelect = document.querySelector('select[name="unit"]');
 
-    // Obtiene los permisos existentes en localStorage
-    const permisos = JSON.parse(localStorage.getItem('permisos')) || [];
-    let editingIndex = null; // Índice para rastrear si se está editando una fila
+    let permisos = JSON.parse(localStorage.getItem('permisos')) || [];
+    let editingIndex = null;
+
+    // Obtener los tipos de permisos y departamentos desde localStorage
+    const tiposPermisos = JSON.parse(localStorage.getItem('tiposPermiso')) || [];
+    const departamentos = JSON.parse(localStorage.getItem('departamentos')) || [];
 
     // Mostrar modal al hacer clic en "Crear"
     btnCreate.addEventListener('click', () => {
@@ -28,22 +33,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Evento para capturar y guardar solicitudes en localStorage
+    // Guardar o actualizar solicitud al enviar el formulario
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
         // Captura los valores del formulario
         const nombre = document.getElementById('name').value;
         const jefe = document.getElementById('boss').value;
-        const unidad = document.querySelector('select[name="unit"] option:checked').textContent;
+        const unidad = unitSelect.options[unitSelect.selectedIndex]?.textContent;
         const horaInicio = document.getElementById('start-time').value;
         const horaFin = document.getElementById('end-time').value;
-        const motivo = document.querySelector('select[name="reason"] option:checked').textContent;
+        const motivo = reasonSelect.options[reasonSelect.selectedIndex]?.textContent;
         const observaciones = document.getElementById('description').value;
 
-        // Crea un objeto con los datos del permiso
-        const permiso = {
-            id: 1,
+        const nuevoPermiso = {
+            id: permisos.length + 1,
             nombre,
             jefe,
             unidad,
@@ -54,33 +58,29 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         if (editingIndex === null) {
-            // Si no se está editando, agregar un nuevo permiso
-            permisos.push(permiso);
-            agregarFila(permiso, permisos.length - 1);
-            alert('Solicitud creada correctamente.');
+            permisos.push(nuevoPermiso);
+            agregarFila(nuevoPermiso, permisos.length - 1);
+            alert('Permiso creado correctamente.');
         } else {
-            // Si se está editando, actualizar los datos
-            permisos[editingIndex] = permiso;
-            actualizarFila(permiso, editingIndex);
-            alert('Solicitud modificada correctamente.');
+            permisos[editingIndex] = nuevoPermiso;
+            actualizarFila(nuevoPermiso, editingIndex);
+            alert('Permiso modificado correctamente.');
         }
 
-        // Guardar en localStorage
         localStorage.setItem('permisos', JSON.stringify(permisos));
 
-        // Limpiar formulario y cerrar modal
         form.reset();
         modal.style.display = 'none';
     });
 
-    // Itera sobre los permisos y los agrega a la tabla
+    // Cargar filas existentes al inicio
     permisos.forEach((permiso, index) => agregarFila(permiso, index));
 
     // Función para agregar una fila a la tabla
     function agregarFila(permiso, index) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td>${permiso.id + index}</td>
+            <td>${permiso.id}</td>
             <td>${permiso.nombre}</td>
             <td>${permiso.jefe}</td>
             <td>${permiso.unidad}</td>
@@ -94,12 +94,10 @@ document.addEventListener('DOMContentLoaded', function () {
             </td>
         `;
 
-        // Botón "Modificar"
         newRow.querySelector('.btn-modify').addEventListener('click', function () {
             abrirParaEditar(permiso, index);
         });
 
-        // Botón "Eliminar"
         newRow.querySelector('.btn-delete').addEventListener('click', function () {
             if (confirm('¿Estás seguro de que deseas eliminar este permiso?')) {
                 eliminarFila(index);
@@ -110,20 +108,18 @@ document.addEventListener('DOMContentLoaded', function () {
         tableBody.appendChild(newRow);
     }
 
-    // Función para abrir el modal y rellenar el formulario para edición
     function abrirParaEditar(permiso, index) {
         modal.style.display = 'flex';
         document.getElementById('name').value = permiso.nombre;
         document.getElementById('boss').value = permiso.jefe;
-        document.querySelector('select[name="unit"]').value = permiso.unidad;
+        unitSelect.value = permiso.unidad;
         document.getElementById('start-time').value = permiso.horaInicio;
         document.getElementById('end-time').value = permiso.horaFin;
-        document.querySelector('select[name="reason"]').value = permiso.motivo;
+        reasonSelect.value = permiso.motivo;
         document.getElementById('description').value = permiso.observaciones;
-        editingIndex = index; // Guardar el índice de la fila que se está editando
+        editingIndex = index;
     }
 
-    // Función para actualizar una fila en la tabla
     function actualizarFila(permiso, index) {
         const rows = tableBody.getElementsByTagName('tr');
         const row = rows[index];
@@ -136,9 +132,33 @@ document.addEventListener('DOMContentLoaded', function () {
         row.cells[7].textContent = permiso.observaciones;
     }
 
-    // Función para eliminar una fila de localStorage
     function eliminarFila(index) {
-        permisos.splice(index, 1); // Eliminar del array
-        localStorage.setItem('permisos', JSON.stringify(permisos)); // Guardar cambios
+        permisos.splice(index, 1);
+        localStorage.setItem('permisos', JSON.stringify(permisos));
     }
+
+    // Cargar tipos de permisos en el selector
+    const cargarTiposPermisos = () => {
+        reasonSelect.innerHTML = '<option value="" disabled selected></option>';
+        tiposPermisos.forEach((tipo) => {
+            const option = document.createElement('option');
+            option.value = tipo.id;
+            option.textContent = tipo.nombre;
+            reasonSelect.appendChild(option);
+        });
+    };
+
+    // Cargar departamentos en el selector de unidad
+    const cargarDepartamentos = () => {
+        unitSelect.innerHTML = '<option value="" disabled selected></option>';
+        departamentos.forEach((departamento) => {
+            const option = document.createElement('option');
+            option.value = departamento.id;
+            option.textContent = departamento.nombre;
+            unitSelect.appendChild(option);
+        });
+    };
+
+    cargarTiposPermisos();
+    cargarDepartamentos();
 });
