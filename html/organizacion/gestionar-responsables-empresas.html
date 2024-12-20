@@ -1,60 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Responsables de Empresas</title>
-    <link rel="stylesheet" href="../../css/homestyles.css">
-    <link rel="stylesheet" href="../../css/crudstyles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestionar Responsables de Empresas</title>
+  <link rel="stylesheet" href="../../css/homestyles.css">
+  <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <h1>Gestionar Responsables de Empresas</h1>
-        </nav>
-    </header>
-    <main>
-        <div class="crud-container">
-            <div class="action-buttons">
-                <button id="create-new" class="btn">Crear Responsable</button>
-                <button id="back-to-home" class="btn" onclick="window.location.href='../index.html';">Volver al Inicio</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Unidad</th>
-                        <th>Cargo</th>
-                        <th>Teléfono</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="responsable-table"></tbody>
-            </table>
-        </div>
-        <div id="form-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Crear/Modificar Responsable</h3>
-                <form id="responsable-form">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+  <header>
+    <nav class="navbar">
+      <h1>Gestionar Responsables de Empresas</h1>
+    </nav>
+  </header>
+  <main>
+    <div class="crud-container">
+      <div class="action-buttons">
+        <button id="create-new" class="btn">Crear Responsable</button>
+        <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html';">Volver al Inicio</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Unidad</th>
+            <th>Cargo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="responsable-table"></tbody>
+      </table>
+    </div>
+    <div id="form-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Crear/Modificar Responsable</h3>
+        <form id="responsable-form">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
 
-                    <label for="unidad">Unidad:</label>
-                    <input type="text" id="unidad" name="unidad" required>
+          <label for="unidad">Unidad:</label>
+          <select id="unidad" name="unidad" required>
+            <option value="" disabled selected>Seleccione una unidad</option>
+          </select>
 
-                    <label for="cargo">Cargo:</label>
-                    <input type="text" id="cargo" name="cargo" required>
+          <label for="cargo">Cargo:</label>
+          <select id="cargo" name="cargo" required>
+            <option value="" disabled selected>Seleccione un cargo</option>
+          </select>
 
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required>
 
-                    <button type="submit">Guardar</button>
-                    <button type="button" id="cancel-button">Cancelar</button>
-                </form>
-            </div>
-        </div>
-    </main>
-    <script src="../../js/organizacion/responsables-empresa-crud.js"></script>
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" required>
+
+          <button type="submit">Guardar</button>
+          <button type="button" id="cancel-button">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="../../js/organizacion/responsables-empresa-crud.js"></script>
 </body>
+
 </html>
