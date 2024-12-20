@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Botón "Modificar"
       newRow.querySelector('.btn-modify').addEventListener('click', function () {
-          abrirParaEditar(solicitud, index);
+          abrirParaEditar(empleado, index);
       });
 
       // Botón "Eliminar"
       newRow.querySelector('.btn-delete').addEventListener('click', function () {
-          if (confirm('¿Estás seguro de que deseas eliminar esta solicitud?')) {
+          if (confirm('¿Estás seguro de que deseas eliminar?')) {
               eliminarFila(index);
               newRow.remove();
           }
@@ -118,12 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // Función para abrir el modal y rellenar el formulario para edición
   function abrirParaEditar(empleado, index) {
       modal.style.display = 'flex';
-      document.getElementById('name').value = empleado.carnet;
-      document.getElementById('boss').value = empleado.nombre;
-      positionSelect.value = empleado.cargo;
-      unitSelect.value = empleado.unidad;
+      document.getElementById('carnet').value = empleado.carnet;
+      document.getElementById('name').value = empleado.nombre;
+      positionSelect.value.textContent = empleado.cargo;
+      unitSelect.value.textContent = empleado.unidad;
       document.getElementById('birth-date').value = empleado.fechaNacimiento;
-      document.getElementById('entry-time').value = empleado.fechaIngreso;
+      document.getElementById('entry-date').value = empleado.fechaIngreso;
       document.getElementById('user').value = empleado.usuario;
       document.getElementById('password').value = empleado.contraseña;
       editingIndex = index; // Guardar el índice de la fila que se está editando
@@ -133,14 +133,14 @@ document.addEventListener('DOMContentLoaded', function () {
   function actualizarFila(empleado, index) {
       const rows = tableBody.getElementsByTagName('tr');
       const row = rows[index];
+      row.cells[0].textContent = empleado.carnet;
       row.cells[1].textContent = empleado.nombre;
-      row.cells[2].textContent = empleado.jefe;
-      row.cells[3].textContent = empleado.fechaInicio;
-      row.cells[4].textContent = empleado.fechaFin;
-      row.cells[5].textContent = empleado.horaInicio;
-      row.cells[6].textContent = empleado.horaFin;
-      row.cells[7].textContent = empleado.motivo;
-      row.cells[8].textContent = empleado.estado;
+      row.cells[2].textContent = empleado.cargo;
+      row.cells[3].textContent = empleado.unidad;
+      row.cells[4].textContent = empleado.fechaNacimiento;
+      row.cells[5].textContent = empleado.fechaIngreso;
+      row.cells[6].textContent = empleado.usuario;
+      row.cells[7].textContent = empleado.contraseña;
   }
 
   // Función para eliminar una empleado del localStorage
