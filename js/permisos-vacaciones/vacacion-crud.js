@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let solicitudes = JSON.parse(localStorage.getItem('solicitudes')) || [];
     let editingIndex = null; // Índice para rastrear si se está editando una fila
 
+    const typeVacationSelect = document.getElementById('reason');
+    const typeVacation = JSON.parse(localStorage.getItem('tiposVacacion')) || [];
+
     // Mostrar modal al hacer clic en "Crear"
     btnCreate.addEventListener('click', () => {
         modal.style.display = 'flex';
@@ -38,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const fechaFin = document.getElementById('end-date').value;
         const horaInicio = document.getElementById('start-time').value;
         const horaFin = document.getElementById('end-time').value;
-        const motivo = document.querySelector('select[name="reason"] option:checked').textContent;
+        const motivo = typeVacationSelect.options[typeVacationSelect.selectedIndex]?.textContent;
 
         const nuevaSolicitud = {
             id: 1,
@@ -133,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('end-date').value = solicitud.fechaFin;
         document.getElementById('start-time').value = solicitud.horaInicio;
         document.getElementById('end-time').value = solicitud.horaFin;
-        document.querySelector('select[name="reason"]').value = solicitud.motivo;
+        typeVacationSelect.value = solicitud.motivo;
         editingIndex = index; // Guardar el índice de la fila que se está editando
     }
 
@@ -163,4 +166,17 @@ document.addEventListener('DOMContentLoaded', function () {
         solicitudes.splice(index, 1);
         localStorage.setItem('solicitudes', JSON.stringify(solicitudes));
     }
+
+      // Cargar opciones en el select de tipos de vacaciones
+  const loadTypeVacations = () => {
+    typeVacationSelect.innerHTML = '<option value="" disabled selected></option>';
+    typeVacation.forEach((vacation) => {
+      const option = document.createElement('option');
+      option.value = vacation.id;
+      option.textContent = vacation.nombre;
+      typeVacationSelect.appendChild(option);
+    });
+  };
+
+  loadTypeVacations();
 });

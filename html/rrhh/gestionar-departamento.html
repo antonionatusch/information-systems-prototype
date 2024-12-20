@@ -17,6 +17,7 @@
             <ul class="nav-links">
                 <li><a href="../../index.html">Inicio</a></li>
                 <li><a href="gestionar-empleado.html">Empleados</a></li>
+                <li><a href="gestionar-cargos.html">Cargos</a></li>
             </ul>
         </nav>
     </header>
@@ -50,15 +51,14 @@
                     <label for="id">Código:</label>
                     <input type="text" id="id" name="id" required>
 
-                    <label for="name">Nombre:</label>
+                    <label for="name">Departamento:</label>
                     <input type="text" id="name" name="name" required>
                     
                     <label for="description">Descripción:</label>
                     <textarea id="description" name="description" rows="4" required></textarea>
                     
                     <div class="form-footer">
-                        <button type="submit" class="btn-send">Enviar</button>
-                        <button type="button" class="btn-cancel" onclick="window.location.href='./gestionar-departamento.html'">Cancelar</button>
+                        <button type="submit" class="btn-send">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -67,6 +67,6 @@
     <footer>
         <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
     </footer>
-    <script src="../../js/organizacion/departamento-crud.js"></script>
+    <script src="../../js/rrhh/departamento-crud.js"></script>
 </body>
 </html>

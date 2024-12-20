@@ -45,19 +45,22 @@
         <div id="form-modal" class="form-modal">
             <div class="modal-content">
                 <span id="close-modal" class="close">&times;</span>
-                <h2>Crear Tipo de Vacación</h2>
+                <h2>Reporte según Tipo de Vacación</h2>
                 <form id="form-vacation">
-                    <label for="id">Código:</label>
-                    <input type="text" id="id" name="id" required>
-
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="name" required>
                     
-                    <label for="description">Descripción:</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
+                    <label for="type-vacation">Tipo de Vacación:</label>
+                    <select id="type-vacation" name="type-vacation">
+                        <option value="" disabled selected></option>
+                        <option value="vacacion-anual">Vacación Anual</option>
+                        <option value="maternidad">Maternidad</option>
+                        <option value="enfermedad">Enfermedad</option>
+                        <option value="otros">Otros</option>
+                        <option value="licencia-con-goce">Licencia con Goce de Haber</option>
+                        <option value="licencia-sin-goce">Licencia sin Goce de Haber</option>
+                    </select>
                     
                     <div class="form-footer">
-                        <button type="submit" class="btn-send">Registrar</button>
+                        <button type="submit" class="btn-send">Generar Reporte</button>
                     </div>
                 </form>
             </div>
