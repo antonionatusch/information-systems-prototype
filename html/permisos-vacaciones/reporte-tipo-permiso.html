@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Vacaciones</title>
+    <link rel="stylesheet" href="../../css/homestyles.css">
+    <link rel="stylesheet" href="../../css/permisos-vacaciones/crudtipovacacionstyles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <h1>ASIMCO S.R.L.</h1>
+                <img src="../../img/asimco.jpg" alt="ASIMCO Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="permisos.html">Permiso</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="table-container">
+            <h2>Reporte</h2>
+            <button id="btn-create" class="button btn-create">Generar Reporte</button>
+            <table id="table-requests" class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--  -->
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="form-modal" class="form-modal">
+            <div class="modal-content">
+                <span id="close-modal" class="close">&times;</span>
+                <h2>Reporte según Tipo de Permiso</h2>
+                <form id="form-type-permit-report">
+                    
+                    <label for="type-permit">Tipo de Permiso:</label>
+                    <select id="type-permit" name="type-permit">
+                        <option value="" disabled selected></option>
+                    </select>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="btn-send">Generar Reporte</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../../js/permisos-vacaciones/reporte-tipo-permiso.js"></script>
+</body>
+</html>
