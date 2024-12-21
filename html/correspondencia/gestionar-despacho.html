@@ -16,7 +16,6 @@
       <ul class="nav-links">
         <li><a href="../../index.html">Inicio</a></li>
         <li><a href="correspondencia.html">Correspondencia</a></li>
-
         <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
         <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
       </ul>
@@ -33,7 +32,7 @@
           <tr>
             <th>Código</th>
             <th>Receptor</th>
-            <th>Depositante</th>
+            <th>Despachante</th>
             <th>Fecha Entrega</th>
             <th>Hora Entrega</th>
             <th>Acciones</th>
@@ -53,25 +52,22 @@
           <select id="codigo-correspondencia" required></select>
 
           <label for="fecha-correspondencia">Fecha de Correspondencia:</label>
-          <input type="date" id="fecha-correspondencia" required>
+          <input type="date" id="fecha-correspondencia" readonly>
 
           <label for="hora-correspondencia">Hora:</label>
-          <input type="time" id="hora-correspondencia" required>
+          <input type="time" id="hora-correspondencia" readonly>
 
           <label for="asunto">Asunto:</label>
-          <input type="text" id="asunto" required>
+          <input type="text" id="asunto" readonly>
 
           <label for="despachante">Despachante:</label>
-          <input type="text" id="despachante" required>
+          <select id="despachante" required></select>
 
           <label for="destinatario">Destinatario:</label>
-          <input type="text" id="destinatario" required>
-
-          <label for="depositante">Depositante:</label>
-          <input type="text" id="depositante" required>
+          <input type="text" id="destinatario" readonly>
 
           <label for="receptor">Receptor:</label>
-          <input type="text" id="receptor" required>
+          <select id="receptor" required></select>
 
           <label for="fecha-entrega">Fecha de Entrega:</label>
           <input type="date" id="fecha-entrega" required>

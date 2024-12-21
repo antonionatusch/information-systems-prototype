@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
   <link rel="stylesheet" href="../../css/correspondenciastyles.css">
   <link rel="stylesheet" href="../../css/crudstyles.css">
 </head>
-
 <body>
   <header>
     <nav class="navbar">
@@ -17,7 +15,6 @@
       <ul class="nav-links">
         <li><a href="../../index.html">Inicio</a></li>
         <li><a href="correspondencia.html">Correspondencia</a></li>
-
         <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
         <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
       </ul>
@@ -59,13 +56,13 @@
           <input type="time" id="hora" name="hora" required>
 
           <label for="asunto">Asunto:</label>
-          <input type="text" id="asunto" name="asunto" required>
+          <select id="asunto" name="asunto" required></select>
 
           <label for="despachante">Despachante:</label>
-          <input type="text" id="despachante" name="despachante" required>
+          <select id="despachante" name="despachante" required></select>
 
           <label for="destinatario">Destinatario:</label>
-          <input type="text" id="destinatario" name="destinatario" required>
+          <select id="destinatario" name="destinatario" required></select>
 
           <button type="submit" class="btn">Guardar</button>
         </form>
@@ -74,5 +71,4 @@
   </main>
   <script src="../../js/correspondencia-despachada-crud.js"></script>
 </body>
-
 </html>

@@ -16,7 +16,6 @@
       <ul class="nav-links">
         <li><a href="../../index.html">Inicio</a></li>
         <li><a href="correspondencia.html">Correspondencia</a></li>
-
         <li><a href="../permisos-vacaciones/permisos.html">Permisos</a></li>
         <li><a href="../permisos-vacaciones/vacaciones.html">Vacaciones</a></li>
       </ul>
@@ -26,8 +25,7 @@
     <div class="crud-container">
       <div class="action-buttons">
         <button id="create-new" class="btn">Registrar Entrega</button>
-        <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html';">Volver al
-          Inicio</button>
+        <button id="back-to-home" class="btn" onclick="window.location.href='../../index.html';">Volver al Inicio</button>
       </div>
       <table>
         <thead>
@@ -72,10 +70,10 @@
           <input type="text" id="destinatario" name="destinatario" readonly>
 
           <label for="depositante">Depositante:</label>
-          <input type="text" id="depositante" name="depositante" required>
+          <select id="depositante" name="depositante" required></select>
 
           <label for="receptor">Receptor:</label>
-          <input type="text" id="receptor" name="receptor" required>
+          <select id="receptor" name="receptor" required></select>
 
           <label for="fecha-entrega">Fecha de la Entrega:</label>
           <input type="date" id="fecha-entrega" name="fecha-entrega" required>

@@ -8,7 +8,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let correspondenciasRecibidas =
     JSON.parse(localStorage.getItem('correspondenciasRecibidas')) || [];
+  let asuntos = JSON.parse(localStorage.getItem('asuntos')) || [];
+  let empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+  let departamentos = JSON.parse(localStorage.getItem('departamentos')) || [];
+  let responsables = JSON.parse(localStorage.getItem('responsables')) || [];
+
   let editingIndex = null;
+
+  // Rellenar selects
+  const asuntoSelect = document.getElementById('asunto');
+  const remitenteSelect = document.getElementById('remitente');
+  const destinatarioSelect = document.getElementById('destinatario');
+  const responsableSelect = document.getElementById('responsable');
+
+  function fillSelectOptions(selectElement, options, keyName) {
+    selectElement.innerHTML = '<option value="">Seleccione una opción</option>';
+    options.forEach((option) => {
+      const opt = document.createElement('option');
+      opt.value = option.codigo || option.id || option.nombre;
+      opt.textContent = option[keyName];
+      selectElement.appendChild(opt);
+    });
+  }
+
+  fillSelectOptions(asuntoSelect, asuntos, 'titulo');
+  fillSelectOptions(remitenteSelect, empresas, 'nombre');
+  fillSelectOptions(destinatarioSelect, departamentos, 'nombre');
+  fillSelectOptions(responsableSelect, responsables, 'nombre');
 
   // Mostrar modal al hacer clic en "Registrar Correspondencia"
   btnCreate.addEventListener('click', () => {
@@ -38,8 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const hora = document.getElementById('hora').value;
     const asunto = document.getElementById('asunto').value;
     const remitente = document.getElementById('remitente').value;
+    const destinatario = document.getElementById('destinatario').value;
+    const responsable = document.getElementById('responsable').value;
 
-    const nuevaCorrespondencia = { codigo, fecha, hora, asunto, remitente };
+    const nuevaCorrespondencia = {
+      codigo,
+      fecha,
+      hora,
+      asunto,
+      remitente,
+      destinatario,
+      responsable,
+    };
 
     if (editingIndex === null) {
       correspondenciasRecibidas.push(nuevaCorrespondencia);
@@ -73,6 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${correspondencia.hora}</td>
             <td>${correspondencia.asunto}</td>
             <td>${correspondencia.remitente}</td>
+            <td>${correspondencia.destinatario}</td>
+            <td>${correspondencia.responsable}</td>
             <td>
                 <button class="button btn-modify">Modificar</button>
                 <button class="button btn-delete">Eliminar</button>
@@ -105,6 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('hora').value = correspondencia.hora;
     document.getElementById('asunto').value = correspondencia.asunto;
     document.getElementById('remitente').value = correspondencia.remitente;
+    document.getElementById('destinatario').value =
+      correspondencia.destinatario;
+    document.getElementById('responsable').value = correspondencia.responsable;
     editingIndex = index;
   }
 
@@ -117,6 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
     row.cells[2].textContent = correspondencia.hora;
     row.cells[3].textContent = correspondencia.asunto;
     row.cells[4].textContent = correspondencia.remitente;
+    row.cells[5].textContent = correspondencia.destinatario;
+    row.cells[6].textContent = correspondencia.responsable;
   }
 
   // Función para eliminar una fila del localStorage

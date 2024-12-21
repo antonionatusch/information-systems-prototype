@@ -7,13 +7,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const typeSelector = document.getElementById('tipo');
   const amountField = document.getElementById('monto');
   const createNewButton = document.getElementById('create-new');
+  const destinatarioSelector = document.getElementById('destinatario');
+  const responsableSelector = document.getElementById('responsable');
 
   let proposals = JSON.parse(localStorage.getItem('propuestas')) || [];
   let proposalTypes = JSON.parse(localStorage.getItem('proposalTypes')) || [];
   let contracts = JSON.parse(localStorage.getItem('contratos')) || [];
+  let empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+  let empleados = JSON.parse(localStorage.getItem('empleados')) || [];
   let editingIndex = null;
 
-  // Cargar tipos de propuesta
   function loadProposalTypes() {
     typeSelector.innerHTML = '<option value="">Seleccione un tipo</option>';
     proposalTypes.forEach((type) => {
@@ -24,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Cargar contratos
   function loadContracts() {
     contractSelector.innerHTML = '<option value="">Sin contrato</option>';
     contracts.forEach((contract) => {
@@ -35,7 +37,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Actualizar monto al seleccionar contrato
+  function loadDestinatarios() {
+    destinatarioSelector.innerHTML =
+      '<option value="">Seleccione un destinatario</option>';
+    empresas.forEach((empresa) => {
+      const option = document.createElement('option');
+      option.value = empresa.responsable;
+      option.textContent = empresa.responsable;
+      destinatarioSelector.appendChild(option);
+    });
+  }
+
+  function loadResponsables() {
+    responsableSelector.innerHTML =
+      '<option value="">Seleccione un responsable</option>';
+    empleados.forEach((empleado) => {
+      const option = document.createElement('option');
+      option.value = empleado.nombre;
+      option.textContent = empleado.nombre;
+      responsableSelector.appendChild(option);
+    });
+  }
+
   contractSelector.addEventListener('change', function () {
     const selectedContract = contracts.find(
       (contract) => contract.codigo === this.value,
@@ -43,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
     amountField.value = selectedContract ? selectedContract.monto : '';
   });
 
-  // Renderizar propuestas
   function renderProposals() {
     proposalTable.innerHTML = '';
     proposals.forEach((proposal, index) => {
@@ -64,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Mostrar modal para crear nueva propuesta
   createNewButton.addEventListener('click', function () {
     formModal.style.display = 'flex';
     proposalForm.reset();
@@ -73,15 +94,14 @@ document.addEventListener('DOMContentLoaded', function () {
     editingIndex = null;
   });
 
-  // Guardar propuesta
   proposalForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const newProposal = {
       codigo: document.getElementById('codigo').value,
       tipo: typeSelector.value,
-      destinatario: document.getElementById('destinatario').value,
-      responsable: document.getElementById('responsable').value,
+      destinatario: destinatarioSelector.value,
+      responsable: responsableSelector.value,
       monto: amountField.value,
       contrato: contractSelector.value || 'Sin contrato',
     };
@@ -99,13 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
     proposalForm.reset();
   });
 
-  // Editar propuesta
   window.editProposal = function (index) {
     const proposal = proposals[index];
     document.getElementById('codigo').value = proposal.codigo;
     typeSelector.value = proposal.tipo;
-    document.getElementById('destinatario').value = proposal.destinatario;
-    document.getElementById('responsable').value = proposal.responsable;
+    destinatarioSelector.value = proposal.destinatario;
+    responsableSelector.value = proposal.responsable;
     contractSelector.value = proposal.contrato;
     amountField.value = proposal.monto;
 
@@ -113,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
     formModal.style.display = 'flex';
   };
 
-  // Eliminar propuesta
   window.deleteProposal = function (index) {
     if (confirm('¿Está seguro de eliminar esta propuesta?')) {
       proposals.splice(index, 1);
@@ -122,12 +140,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  // Inicializar
   closeModalButton.addEventListener(
     'click',
     () => (formModal.style.display = 'none'),
   );
   loadProposalTypes();
   loadContracts();
+  loadDestinatarios();
+  loadResponsables();
   renderProposals();
 });
