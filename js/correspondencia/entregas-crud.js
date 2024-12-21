@@ -17,14 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const asuntoInput = document.getElementById('asunto');
   const remitenteInput = document.getElementById('remitente');
   const destinatarioInput = document.getElementById('destinatario');
-  const depositanteInput = document.getElementById('depositante');
-  const receptorInput = document.getElementById('receptor');
+  const depositanteSelect = document.getElementById('depositante');
+  const receptorSelect = document.getElementById('receptor');
   const fechaEntregaInput = document.getElementById('fecha-entrega');
   const horaEntregaInput = document.getElementById('hora-entrega');
 
   let entregas = JSON.parse(localStorage.getItem('entregas')) || [];
   let correspondencias =
     JSON.parse(localStorage.getItem('correspondenciasRecibidas')) || [];
+  let empleados = JSON.parse(localStorage.getItem('empleados')) || [];
   let editingIndex = null;
 
   // Cargar correspondencias en el selector
@@ -33,6 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
     option.value = correspondencia.codigo;
     option.textContent = `${correspondencia.codigo} - ${correspondencia.asunto}`;
     codigoCorrespondenciaSelect.appendChild(option);
+  });
+
+  // Cargar empleados en los selectores de depositante y receptor
+  empleados.forEach((empleado) => {
+    const depositanteOption = document.createElement('option');
+    depositanteOption.value = empleado.nombre;
+    depositanteOption.textContent = empleado.nombre;
+    depositanteSelect.appendChild(depositanteOption);
+
+    const receptorOption = document.createElement('option');
+    receptorOption.value = empleado.nombre;
+    receptorOption.textContent = empleado.nombre;
+    receptorSelect.appendChild(receptorOption);
   });
 
   // Actualizar campos de correspondencia al seleccionar una
@@ -65,46 +79,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cerrar modal
   closeModal.addEventListener('click', () => (modal.style.display = 'none'));
   cancelButton.addEventListener('click', () => (modal.style.display = 'none'));
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) modal.style.display = 'none';
-  });
 
   // Guardar o modificar entrega
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const codigoCorrespondencia = codigoCorrespondenciaSelect.value;
-    const fechaCorrespondencia = fechaCorrespondenciaInput.value;
-    const horaCorrespondencia = horaCorrespondenciaInput.value;
-    const asunto = asuntoInput.value;
-    const remitente = remitenteInput.value;
-    const destinatario = destinatarioInput.value;
-    const depositante = depositanteInput.value;
-    const receptor = receptorInput.value;
-    const fechaEntrega = fechaEntregaInput.value;
-    const horaEntrega = horaEntregaInput.value;
-
     const nuevaEntrega = {
-      codigoCorrespondencia,
-      fechaCorrespondencia,
-      horaCorrespondencia,
-      asunto,
-      remitente,
-      destinatario,
-      depositante,
-      receptor,
-      fechaEntrega,
-      horaEntrega,
+      codigoCorrespondencia: codigoCorrespondenciaSelect.value,
+      fechaCorrespondencia: fechaCorrespondenciaInput.value,
+      horaCorrespondencia: horaCorrespondenciaInput.value,
+      asunto: asuntoInput.value,
+      remitente: remitenteInput.value,
+      destinatario: destinatarioInput.value,
+      depositante: depositanteSelect.value,
+      receptor: receptorSelect.value,
+      fechaEntrega: fechaEntregaInput.value,
+      horaEntrega: horaEntregaInput.value,
     };
 
     if (editingIndex === null) {
       entregas.push(nuevaEntrega);
       agregarFila(nuevaEntrega, entregas.length - 1);
-      alert('Entrega registrada correctamente.');
     } else {
       entregas[editingIndex] = nuevaEntrega;
       actualizarFila(nuevaEntrega, editingIndex);
-      alert('Entrega modificada correctamente.');
     }
 
     localStorage.setItem('entregas', JSON.stringify(entregas));
@@ -116,21 +114,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function agregarFila(entrega, index) {
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
-            <td>${entrega.codigoCorrespondencia}</td>
-            <td>${entrega.fechaCorrespondencia}</td>
-            <td>${entrega.horaCorrespondencia}</td>
-            <td>${entrega.asunto}</td>
-            <td>${entrega.remitente}</td>
-            <td>${entrega.destinatario}</td>
-            <td>${entrega.depositante}</td>
-            <td>${entrega.receptor}</td>
-            <td>${entrega.fechaEntrega}</td>
-            <td>${entrega.horaEntrega}</td>
-            <td>
-                <button class="btn btn-modify">Modificar</button>
-                <button class="btn btn-delete">Eliminar</button>
-            </td>
-        `;
+      <td>${entrega.codigoCorrespondencia}</td>
+      <td>${entrega.fechaCorrespondencia}</td>
+      <td>${entrega.horaCorrespondencia}</td>
+      <td>${entrega.asunto}</td>
+      <td>${entrega.remitente}</td>
+      <td>${entrega.destinatario}</td>
+      <td>${entrega.depositante}</td>
+      <td>${entrega.receptor}</td>
+      <td>${entrega.fechaEntrega}</td>
+      <td>${entrega.horaEntrega}</td>
+      <td>
+        <button class="btn btn-modify">Modificar</button>
+        <button class="btn btn-delete">Eliminar</button>
+      </td>`;
     newRow
       .querySelector('.btn-modify')
       .addEventListener('click', () => abrirParaEditar(entrega, index));
@@ -153,8 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
     asuntoInput.value = entrega.asunto;
     remitenteInput.value = entrega.remitente;
     destinatarioInput.value = entrega.destinatario;
-    depositanteInput.value = entrega.depositante;
-    receptorInput.value = entrega.receptor;
+    depositanteSelect.value = entrega.depositante;
+    receptorSelect.value = entrega.receptor;
     fechaEntregaInput.value = entrega.fechaEntrega;
     horaEntregaInput.value = entrega.horaEntrega;
     editingIndex = index;
