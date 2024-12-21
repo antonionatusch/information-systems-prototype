@@ -16,21 +16,23 @@
             </div>
             <ul class="nav-links">
                 <li><a href="../../index.html">Inicio</a></li>
-                <li><a href="gestionar-vacacion.html">Vacaciones</a></li>
+                <li><a href="vacaciones.html">Vacaciones</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section class="table-container">
-            <h2>Tipos de Vacación</h2>
-            <button id="btn-create" class="button btn-create">Crear Tipo de Vacación</button>
+            <h2>Reporte</h2>
+            <button id="btn-create" class="button btn-create">Generar Reporte</button>
             <table id="table-requests" class="styled-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Acciones</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fin</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,17 +48,11 @@
             <div class="modal-content">
                 <span id="close-modal" class="close">&times;</span>
                 <h2>Reporte según Tipo de Vacación</h2>
-                <form id="form-vacation">
+                <form id="form-type-vacation-report">
                     
                     <label for="type-vacation">Tipo de Vacación:</label>
                     <select id="type-vacation" name="type-vacation">
                         <option value="" disabled selected></option>
-                        <option value="vacacion-anual">Vacación Anual</option>
-                        <option value="maternidad">Maternidad</option>
-                        <option value="enfermedad">Enfermedad</option>
-                        <option value="otros">Otros</option>
-                        <option value="licencia-con-goce">Licencia con Goce de Haber</option>
-                        <option value="licencia-sin-goce">Licencia sin Goce de Haber</option>
                     </select>
                     
                     <div class="form-footer">
@@ -69,6 +65,6 @@
     <footer>
         <p>&copy; 2024 ASIMCO S.R.L. Todos los derechos reservados.</p>
     </footer>
-    <script src="../../js/permisos-vacaciones/tipo-vacacion-crud.js"></script>
+    <script src="../../js/permisos-vacaciones/reporte-tipo-vacacion.js"></script>
 </body>
 </html>
